@@ -103,11 +103,11 @@ function KiemTraEuler() {
   });
   console.log(bacDinh);
   const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length;
-  let result = "Không là chu trình Euler";
+  let ketQua = "Không là chu trình Euler";
   if (bacLe === 0) {
-    result = "Là chu trình Euler vì tất cả đỉnh bậc chẵn";
+    ketQua = "Là chu trình Euler vì tất cả đỉnh bậc chẵn";
   } else if (bacLe === 2) {
-    result = "Là nữa chu trình Euler vì có 2 đỉnh bậc lẻ";
+    ketQua = "Là nữa chu trình Euler vì có 2 đỉnh bậc lẻ";
   }
-  document.getElementById("result").innerHTML = result;
+  document.getElementById("ketQua").innerHTML = ketQua;
 }
