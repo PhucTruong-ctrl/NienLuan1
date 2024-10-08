@@ -1,27 +1,32 @@
 let cacCanh = [];
 let cacDinh = [];
-let soCanh = 0;
+let soDinh = 0;
 
 function VeDoThi() {
   cacCanh = [];
   cacDinh = [];
-  soCanh = document.getElementById("soCanh").value;
+  soDinh = document.getElementById("soDinh").value;
 
-  for (let i = 0; i < soCanh; i++) {
+  if (soDinh < 1 || soDinh > 10) {
+    alert("Hãy nhập số đỉnh từ 1 đến 10");
+    return;
+  }
+
+  for (let i = 0; i < soDinh; i++) {
     cacDinh.push(String.fromCharCode(65 + i));
   }
-  console.log(cacDinh);
-  for (let i = 0; i < soCanh; i++) {
+  console.log("Các đỉnh:", cacDinh);
+
+  for (let i = 0; i < soDinh; i++) {
     const a = Math.floor(Math.random() * cacDinh.length);
     const b = Math.floor(Math.random() * cacDinh.length);
     if (a !== b) {
-      // Kiểm tra nếu cạnh đã tồn tại
       if (!coCanh(cacDinh[a], cacDinh[b])) {
         cacCanh.push([cacDinh[a], cacDinh[b]]);
       }
     }
   }
-  console.log(cacCanh);
+  console.log("Các cạnh:", cacCanh);
 
   const canvasContainer = document.getElementById("canvasContainer");
   canvasContainer.innerHTML = "";
@@ -31,19 +36,21 @@ function VeDoThi() {
 
   new p5((p) => {
     p.setup = () => {
-      p.createCanvas(600, 600).parent("canvas");
+      p.createCanvas(800, 800).parent("canvas");
       p.background(255);
 
       const viTri = {};
-      const phamvi_toithieu = 100;
+      const phamvi_toithieu = 150;
+      const maxAttempts = 100;
 
       cacDinh.forEach((diem) => {
         let x, y;
         let dangQuaGan;
+        let attempts = 0;
 
         do {
-          x = p.random(100, 500);
-          y = p.random(100, 300);
+          x = p.random(100, 700);
+          y = p.random(100, 700);
           dangQuaGan = false;
 
           for (const diemKhac in viTri) {
@@ -55,14 +62,42 @@ function VeDoThi() {
               break;
             }
           }
-        } while (dangQuaGan);
+          attempts++;
+        } while (dangQuaGan && attempts < maxAttempts);
+
+        if (attempts >= maxAttempts) {
+          console.warn(
+            `Không thể tìm vị trí hợp lệ cho đỉnh ${diem} sau ${maxAttempts} lần thử.`
+          );
+        }
 
         viTri[diem] = [x, y];
       });
 
+      const bacDinh = DemCanh();
+
+      for (let i = 0; i < 100; i++) {
+        for (const diem in viTri) {
+          let fx = 0;
+          let fy = 0;
+          for (const diemKhac in viTri) {
+            if (diem !== diemKhac) {
+              const [x1, y1] = viTri[diem];
+              const [x2, y2] = viTri[diemKhac];
+              const dist = p.dist(x1, y1, x2, y2);
+              if (dist < phamvi_toithieu) {
+                fx += (x1 - x2) / dist;
+                fy += (y1 - y2) / dist;
+              }
+            }
+          }
+          viTri[diem][0] += fx;
+          viTri[diem][1] += fy;
+        }
+      }
+
       p.stroke(0);
       p.strokeWeight(2);
-
       cacCanh.forEach((canh) => {
         const [batDau, ketThuc] = canh;
         const [x1, y1] = viTri[batDau];
@@ -74,15 +109,26 @@ function VeDoThi() {
       p.noStroke();
       for (const dinh in viTri) {
         const [x, y] = viTri[dinh];
-        p.ellipse(x, y, 20, 20);
+        const bac = bacDinh[dinh];
 
-        p.fill(0);
+        if (bac % 2 !== 0) {
+          p.fill(255, 0, 0); // Nếu bậc lẻ, tô màu đỏ
+        } else if (bac === 0) {
+          p.fill(0, 255, 0); // Nếu bậc 0 (cô đơn), tô màu xanh lá
+        } else {
+          p.fill(0); // Nếu bậc chẵn, tô màu đen
+        }
+
+        p.ellipse(x, y, 20, 20);
         p.textAlign(p.CENTER, p.CENTER);
         p.textSize(16);
         p.text(dinh, x, y - 20);
+
+        console.log("Đỉnh:", dinh, viTri[dinh]);
       }
     };
   });
+
   KiemTraEuler();
 }
 
@@ -95,12 +141,24 @@ function coCanh(batDau, ketThuc) {
   );
 }
 
-function KiemTraEuler() {
+function DemCanh() {
   const bacDinh = {};
-  cacCanh.forEach(([batDau, ketThuc]) => {
-    bacDinh[batDau] = (bacDinh[batDau] || 0) + 1;
-    bacDinh[ketThuc] = (bacDinh[ketThuc] || 0) + 1;
+
+  // Khởi tạo bậc cho tất cả các đỉnh là 0
+  cacDinh.forEach((dinh) => {
+    bacDinh[dinh] = 0;
   });
+
+  cacCanh.forEach(([batDau, ketThuc]) => {
+    bacDinh[batDau] += 1;
+    bacDinh[ketThuc] += 1;
+  });
+
+  return bacDinh;
+}
+
+function KiemTraEuler() {
+  const bacDinh = DemCanh();
   console.log(bacDinh);
   const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length;
   let ketQua = "Không là chu trình Euler";
