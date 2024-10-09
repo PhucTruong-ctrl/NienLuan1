@@ -18,14 +18,27 @@ function VeDoThi() {
   console.log("Các đỉnh:", cacDinh);
 
   for (let i = 0; i < soDinh; i++) {
-    const a = Math.floor(Math.random() * cacDinh.length);
-    const b = Math.floor(Math.random() * cacDinh.length);
-    if (a !== b) {
-      if (!coCanh(cacDinh[a], cacDinh[b])) {
-        cacCanh.push([cacDinh[a], cacDinh[b]]);
-      }
-    }
+  // Kết nối đỉnh hiện tại với đỉnh tiếp theo, đảm bảo tất cả các đỉnh đều có ít nhất một cạnh
+  const a = cacDinh[i];
+  const b = cacDinh[(i + 1) % soDinh]; // Sử dụng % để kết nối đỉnh cuối với đỉnh đầu
+
+  if (!coCanh(a, b)) {
+    cacCanh.push([a, b]);
   }
+}
+
+// Thêm các cạnh ngẫu nhiên để đồ thị có thêm kết nối
+for (let i = 0; i < soDinh; i++) {
+  const a = Math.floor(Math.random() * cacDinh.length);
+  let b;
+  do {
+    b = Math.floor(Math.random() * cacDinh.length);
+  } while (a === b); // Đảm bảo b khác a
+
+  if (!coCanh(cacDinh[a], cacDinh[b])) {
+    cacCanh.push([cacDinh[a], cacDinh[b]]);
+  }
+}
   console.log("Các cạnh:", cacCanh);
 
   const canvasContainer = document.getElementById("canvasContainer");
@@ -43,7 +56,7 @@ function VeDoThi() {
       const phamvi_toithieu = 150;
       const maxAttempts = 100;
 
-      cacDinh.forEach((diem) => {
+      cacDinh.forEach((dinh) => {
         let x, y;
         let dangQuaGan;
         let attempts = 0;
@@ -67,22 +80,22 @@ function VeDoThi() {
 
         if (attempts >= maxAttempts) {
           console.warn(
-            `Không thể tìm vị trí hợp lệ cho đỉnh ${diem} sau ${maxAttempts} lần thử.`
+            `Không thể tìm vị trí hợp lệ cho đỉnh ${dinh} sau ${maxAttempts} lần thử.`
           );
         }
 
-        viTri[diem] = [x, y];
+        viTri[dinh] = [x, y];
       });
 
       const bacDinh = DemCanh();
 
       for (let i = 0; i < 100; i++) {
-        for (const diem in viTri) {
+        for (const dinh in viTri) {
           let fx = 0;
           let fy = 0;
           for (const diemKhac in viTri) {
-            if (diem !== diemKhac) {
-              const [x1, y1] = viTri[diem];
+            if (dinh !== diemKhac) {
+              const [x1, y1] = viTri[dinh];
               const [x2, y2] = viTri[diemKhac];
               const dist = p.dist(x1, y1, x2, y2);
               if (dist < phamvi_toithieu) {
@@ -91,8 +104,8 @@ function VeDoThi() {
               }
             }
           }
-          viTri[diem][0] += fx;
-          viTri[diem][1] += fy;
+          viTri[dinh][0] += fx;
+          viTri[dinh][1] += fy;
         }
       }
 
