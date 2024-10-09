@@ -87,7 +87,7 @@ for (let i = 0; i < soDinh; i++) {
         viTri[dinh] = [x, y];
       });
 
-      const bacDinh = DemCanh();
+      const bacDinh = demCanh();
 
       for (let i = 0; i < 100; i++) {
         for (const dinh in viTri) {
@@ -154,7 +154,7 @@ function coCanh(batDau, ketThuc) {
   );
 }
 
-function DemCanh() {
+function demCanh() {
   const bacDinh = {};
 
   // Khởi tạo bậc cho tất cả các đỉnh là 0
@@ -171,7 +171,7 @@ function DemCanh() {
 }
 
 function KiemTraEuler() {
-  const bacDinh = DemCanh();
+  const bacDinh = demCanh();
   console.log(bacDinh);
   const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length;
   let ketQua = "Không là chu trình Euler";
