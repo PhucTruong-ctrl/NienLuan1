@@ -35,7 +35,8 @@ function taoCacDinh() {
 
 // Hàm kết nối các đỉnh liền kề
 function KetNoiCacDinh() {
-  for (let i = 0; i < soDinh - 1; i++) { // Chỉ duyệt đến soDinh - 1
+  for (let i = 0; i < soDinh - 1; i++) {
+    // Chỉ duyệt đến soDinh - 1
     const a = cacDinh[i];
     const b = cacDinh[i + 1]; // Kết nối đỉnh hiện tại với đỉnh tiếp theo
 
@@ -45,7 +46,6 @@ function KetNoiCacDinh() {
     }
   }
 }
-
 
 // Hàm thêm các cạnh ngẫu nhiên
 function themCacCanhNgauNhien() {
@@ -75,12 +75,11 @@ function VeDoThiCanvas() {
   // Khởi tạo p5 để vẽ đồ thị
   new p5((p) => {
     p.setup = () => {
-      p.createCanvas(800, 800).parent("canvas"); // Tạo canvas
+      p.createCanvas(600, 600).parent("canvas"); // Tạo canvas
       p.background(255); // Thiết lập nền trắng
       const viTri = tinhToaDoDinh(p); // Tính toán vị trí cho các đỉnh
-      chinhToaDoDinh(p, viTri); // Điều chỉnh vị trí của các đỉnh
       veCacCanh(p, viTri); // Vẽ các cạnh
-      veCacDinh(p, viTri); // Vẽ các đỉnh
+      veCacDinh(p,  viTri); // Vẽ các đỉnh
     };
   });
 }
@@ -88,69 +87,22 @@ function VeDoThiCanvas() {
 // Hàm tính toán vị trí của các đỉnh
 function tinhToaDoDinh(p) {
   const viTri = {};
-  const phamvi_toithieu = 150; // Khoảng cách tối thiểu giữa các đỉnh
-  const maxAttempts = 100; // Số lần thử tối đa để tìm vị trí hợp lệ
+  const gridSize = 150; // Kích thước ô lưới
+  const hang = Math.ceil(Math.sqrt(soDinh)); // Tính số hàng
+  const cot = Math.ceil(soDinh / hang); // Tính số cột
 
-  cacDinh.forEach((dinh) => {
-    let x, y;
-    let dangQuaGan;
-    let attempts = 0;
-
-    do {
-      x = p.random(100, 700); // Tạo tọa độ ngẫu nhiên trong khoảng 100 đến 700
-      y = p.random(100, 700);
-      dangQuaGan = false;
-
-      // Kiểm tra khoảng cách với các đỉnh khác
-      for (const diemKhac in viTri) {
-        const [Xkhac, Ykhac] = viTri[diemKhac];
-        const phamvi = p.dist(x, y, Xkhac, Ykhac);
-
-        if (phamvi < phamvi_toithieu) {
-          dangQuaGan = true; // Nếu gần nhau thì đánh dấu là gần
-          break;
-        }
-      }
-      attempts++;
-    } while (dangQuaGan && attempts < maxAttempts); // Lặp cho đến khi tìm thấy vị trí hợp lệ hoặc hết số lần thử
-
-    if (attempts >= maxAttempts) {
-      console.warn(
-        `Không thể tìm vị trí hợp lệ cho đỉnh ${dinh} sau ${maxAttempts} lần thử.`
-      );
-    }
-
-    viTri[dinh] = [x, y]; // Ghi nhận vị trí của đỉnh
-  });
+  for (let i = 0; i < soDinh; i++) {
+    const Hang = Math.floor(i / cot);
+    const Cot = i % cot;
+    const x = 200 + Cot * gridSize; // Tính tọa độ x theo cột
+    const y = 50 + Hang * gridSize; // Tính tọa độ y theo hàng
+    viTri[cacDinh[i]] = [x, y]; // Ghi nhận vị trí của đỉnh
+  }
 
   return viTri; // Trả về vị trí của các đỉnh
 }
 
 // Hàm điều chỉnh tọa độ của các đỉnh
-function chinhToaDoDinh(p, viTri) {
-  const phamvi_toithieu = 150; // Khoảng cách tối thiểu giữa các đỉnh
-  for (let i = 0; i < 100; i++) {
-    // Lặp để điều chỉnh
-    for (const dinh in viTri) {
-      let fx = 0;
-      let fy = 0;
-      for (const diemKhac in viTri) {
-        if (dinh !== diemKhac) {
-          const [x1, y1] = viTri[dinh];
-          const [x2, y2] = viTri[diemKhac];
-          const dist = p.dist(x1, y1, x2, y2);
-          if (dist < phamvi_toithieu) {
-            // Nếu gần nhau
-            fx += (x1 - x2) / dist; // Điều chỉnh theo phương x
-            fy += (y1 - y2) / dist; // Điều chỉnh theo phương y
-          }
-        }
-      }
-      viTri[dinh][0] += fx; // Cập nhật vị trí
-      viTri[dinh][1] += fy; // Cập nhật vị trí
-    }
-  }
-}
 
 // Hàm vẽ các cạnh của đồ thị
 function veCacCanh(p, viTri) {
@@ -161,6 +113,9 @@ function veCacCanh(p, viTri) {
     const [x1, y1] = viTri[batDau]; // Lấy tọa độ của đỉnh bắt đầu
     const [x2, y2] = viTri[ketThuc]; // Lấy tọa độ của đỉnh kết thúc
     p.line(x1, y1, x2, y2); // Vẽ đường thẳng giữa hai đỉnh
+    console.log("Vị trí: ", viTri);
+    console.log("Cạnh: ", canh);
+    console.log("Đỉnh: ", batDau, ketThuc);
   });
 }
 
@@ -176,16 +131,14 @@ function veCacDinh(p, viTri) {
     // Tô màu tùy theo bậc của đỉnh
     if (bac % 2 !== 0) {
       p.fill(255, 0, 0); // Màu đỏ cho bậc lẻ
-    } else if (bac === 0) {
-      p.fill(0, 255, 0); // Màu xanh lá cho bậc 0
     } else {
       p.fill(0); // Màu đen cho bậc chẵn
     }
 
     p.ellipse(x, y, 20, 20); // Vẽ hình tròn cho đỉnh
-    p.textAlign(p.CENTER, p.CENTER); // Canh giữa văn bản
+    p.textAlign("CENTER"); // Canh giữa văn bản
     p.textSize(16); // Kích thước văn bản
-    p.text(dinh, x, y - 20); // Vẽ tên đỉnh
+    p.text(dinh, x - 7, y - 20); // Vẽ tên đỉnh
   }
 }
 
