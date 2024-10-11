@@ -6,9 +6,9 @@ let soDinh = 0;
 function VeDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
   taoCacDinh(); // Tạo danh sách các đỉnh
-  ketNoiCacDinhLienTiep(); // Kết nối các đỉnh liền kề
+  KetNoiCacDinh(); // Kết nối các đỉnh liền kề
   themCacCanhNgauNhien(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
-  veDoThi(); // Vẽ đồ thị lên canvas
+  VeDoThiCanvas(); // Vẽ đồ thị lên canvas
   KiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
 }
 
@@ -34,10 +34,10 @@ function taoCacDinh() {
 }
 
 // Hàm kết nối các đỉnh liền kề
-function ketNoiCacDinhLienTiep() {
-  for (let i = 0; i < soDinh; i++) {
+function KetNoiCacDinh() {
+  for (let i = 0; i < soDinh - 1; i++) { // Chỉ duyệt đến soDinh - 1
     const a = cacDinh[i];
-    const b = cacDinh[(i + 1) % soDinh]; // Kết nối đỉnh cuối với đỉnh đầu
+    const b = cacDinh[i + 1]; // Kết nối đỉnh hiện tại với đỉnh tiếp theo
 
     // Kiểm tra nếu cạnh không tồn tại thì thêm vào danh sách
     if (!coCanh(a, b)) {
@@ -45,6 +45,7 @@ function ketNoiCacDinhLienTiep() {
     }
   }
 }
+
 
 // Hàm thêm các cạnh ngẫu nhiên
 function themCacCanhNgauNhien() {
@@ -64,12 +65,12 @@ function themCacCanhNgauNhien() {
 }
 
 // Hàm vẽ đồ thị lên canvas
-function veDoThi() {
+function VeDoThiCanvas() {
   const canvasContainer = document.getElementById("canvasContainer");
   canvasContainer.innerHTML = ""; // Xóa nội dung hiện có trong container
-  const canvas = document.createElement("div");
-  canvas.id = "canvas"; // Tạo div cho canvas
-  canvasContainer.appendChild(canvas);
+  const canvas = document.createElement("div"); // Tạo div cho canvas
+  canvas.id = "canvas"; // Găn id cho canvas
+  canvasContainer.appendChild(canvas); // Thêm div canvas này thành con của container
 
   // Khởi tạo p5 để vẽ đồ thị
   new p5((p) => {
