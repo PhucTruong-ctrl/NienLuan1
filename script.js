@@ -6,7 +6,6 @@ let soDinh = 0;
 function VeDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
   taoCacDinh(); // Tạo danh sách các đỉnh
-  KetNoiCacDinh(); // Kết nối các đỉnh liền kề
   themCacCanhNgauNhien(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
   VeDoThiCanvas(); // Vẽ đồ thị lên canvas
   KiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
@@ -33,20 +32,6 @@ function taoCacDinh() {
   console.log("Các đỉnh:", cacDinh); // In ra danh sách các đỉnh
 }
 
-// Hàm kết nối các đỉnh liền kề
-function KetNoiCacDinh() {
-  for (let i = 0; i < soDinh - 1; i++) {
-    // Chỉ duyệt đến soDinh - 1
-    const a = cacDinh[i];
-    const b = cacDinh[i + 1]; // Kết nối đỉnh hiện tại với đỉnh tiếp theo
-
-    // Kiểm tra nếu cạnh không tồn tại thì thêm vào danh sách
-    if (!coCanh(a, b)) {
-      cacCanh.push([a, b]);
-    }
-  }
-}
-
 // Hàm thêm các cạnh ngẫu nhiên
 function themCacCanhNgauNhien() {
   for (let i = 0; i < soDinh; i++) {
@@ -61,7 +46,7 @@ function themCacCanhNgauNhien() {
       cacCanh.push([cacDinh[a], cacDinh[b]]);
     }
   }
-  console.log("Các cạnh:", cacCanh); // In ra danh sách các cạnh
+  console.log("Các cạnh ngẫu nhiên:", cacCanh); // In ra danh sách các cạnh
 }
 
 // Hàm vẽ đồ thị lên canvas
@@ -79,7 +64,7 @@ function VeDoThiCanvas() {
       p.background(255); // Thiết lập nền trắng
       const viTri = tinhToaDoDinh(p); // Tính toán vị trí cho các đỉnh
       veCacCanh(p, viTri); // Vẽ các cạnh
-      veCacDinh(p,  viTri); // Vẽ các đỉnh
+      veCacDinh(p, viTri); // Vẽ các đỉnh
     };
   });
 }
