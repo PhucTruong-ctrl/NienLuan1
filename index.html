@@ -12,7 +12,12 @@
       <label for="soDinh">Nhập số đỉnh:</label>
       <input type="number" id="soDinh" min="1" max="12" />
     </div>
-    <button onclick="VeDoThi()">Vẽ</button>
+    <div class="file-input">
+      <input type="file" id="file-upload" /> <br />
+      <button onclick="veTheoFile()">Vẽ bằng File</button>
+      <button onclick="veDoThi()">Vẽ Ngẫu Nhiên</button>
+    </div>
+    <button onclick="xoaDoThi()">Xoá</button>
     <div id="ketQua"></div>
     <div id="canvasContainer"></div>
 

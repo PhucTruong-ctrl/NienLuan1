@@ -3,12 +3,16 @@ let cacDinh = [];
 let soDinh = 0;
 
 // Hàm chính để vẽ đồ thị
-function VeDoThi() {
+function veDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
   taoCacDinh(); // Tạo danh sách các đỉnh
   themCacCanhNgauNhien(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
-  VeDoThiCanvas(); // Vẽ đồ thị lên canvas
-  KiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
+  veDoThiCanvas(); // Vẽ đồ thị lên canvas
+  kiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
+}
+
+function xoaDoThi() {
+  window.location.href = window.location.href
 }
 
 // Hàm khởi tạo đồ thị
@@ -50,7 +54,7 @@ function themCacCanhNgauNhien() {
 }
 
 // Hàm vẽ đồ thị lên canvas
-function VeDoThiCanvas() {
+function veDoThiCanvas() {
   const canvasContainer = document.getElementById("canvasContainer");
   canvasContainer.innerHTML = ""; // Xóa nội dung hiện có trong container
   const canvas = document.createElement("div"); // Tạo div cho canvas
@@ -150,7 +154,7 @@ function demCanh() {
 }
 
 // Hàm kiểm tra tính Euler của đồ thị
-function KiemTraEuler() {
+function kiemTraEuler() {
   const bacDinh = demCanh(); // Tính bậc của các đỉnh
   console.log("Bậc của các đỉnh là: ", bacDinh); // In ra bậc của các đỉnh
   const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length; // Đếm số đỉnh bậc lẻ
