@@ -18,8 +18,8 @@ function khoiTaoDoThi() {
   soDinh = document.getElementById("soDinh").value; // Lấy số đỉnh từ input
 
   // Kiểm tra xem số đỉnh có hợp lệ không
-  if (soDinh < 1 || soDinh > 10) {
-    alert("Hãy nhập số đỉnh từ 1 đến 10");
+  if (soDinh < 1 || soDinh > 12) {
+    alert("Hãy nhập số đỉnh từ 1 đến 12");
     return;
   }
 }
@@ -152,7 +152,7 @@ function demCanh() {
 // Hàm kiểm tra tính Euler của đồ thị
 function KiemTraEuler() {
   const bacDinh = demCanh(); // Tính bậc của các đỉnh
-  console.log(bacDinh); // In ra bậc của các đỉnh
+  console.log("Bậc của các đỉnh là: ", bacDinh); // In ra bậc của các đỉnh
   const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length; // Đếm số đỉnh bậc lẻ
   let ketQua = "Không là chu trình Euler"; // Kết quả mặc định
   if (bacLe === 0) {
