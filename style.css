@@ -21,3 +21,24 @@ button {
   align-items: center;
   place-items: center;
 }
+
+#maTranKe {
+  float: right;
+  margin-top: -605px;
+  margin-right: 220px;
+}
+
+#maTranKe table {
+  border-collapse: collapse;
+}
+
+#maTranKe th,
+#maTranKe td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#maTranKe th {
+  background-color: #f0f0f0;
+}

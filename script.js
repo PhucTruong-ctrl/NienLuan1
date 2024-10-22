@@ -9,6 +9,7 @@ function veDoThi() {
   themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
   veDoThiCanvas(); // Vẽ đồ thị lên canvas
   kiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
+  hienThiMaTranKe();
 }
 
 function xoaDoThi() {
@@ -36,18 +37,12 @@ function taoCacDinh() {
   console.log("Các đỉnh:", cacDinh); // In ra danh sách các đỉnh
 }
 function themCanh(dinhA, dinhB) {
-  // Kiểm tra bậc của đỉnh a và b
-  const bacA = demCanh()[dinhA];
-  const bacB = demCanh()[dinhB];
-
-  // Nếu bậc của đỉnh a hoặc b là 0 thì thêm cạnh
-  if (bacA == 0 || bacB == 0) {
-    // Kiểm tra nếu cạnh không tồn tại thì thêm vào danh sách
-    if (!coCanh(dinhA, dinhB)) {
-      cacCanh.push([dinhA, dinhB]);
-    }
+  // Luôn thêm cạnh nếu chưa có
+  if (!coCanh(dinhA, dinhB)) {
+    cacCanh.push([dinhA, dinhB]);
   }
 }
+
 // Hàm thêm các cạnh ngẫu nhiên
 function themCacCanh() {
   for (let i = 0; i < soDinh; i++) {
@@ -59,8 +54,8 @@ function themCacCanh() {
     themCanh(cacDinh[a], cacDinh[b]);
   }
   // Kiểm tra tất cả các đỉnh và thêm cạnh vào những đỉnh có bậc là 0
-  for (const dinh in demCanh()) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
-    if (demCanh()[dinh] == 0) {
+  for (const dinh of cacDinh) {
+    if (demBacDinh(dinh) == 0) {
       let dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)];
       while (dinhTemp == dinh) {
         dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)];
@@ -129,7 +124,7 @@ function veCacCanh(p, viTri) {
 
 // Hàm vẽ các đỉnh của đồ thị
 function veCacDinh(p, viTri) {
-  const bacDinh = demCanh(); // Tính bậc của các đỉnh
+  const bacDinh = demBacDinh(); // Tính bậc của các đỉnh
   p.fill(0); // Màu đen cho đỉnh
   p.noStroke(); // Không vẽ viền cho đỉnh
   for (const dinh in viTri) {
@@ -160,28 +155,66 @@ function coCanh(batDau, ketThuc) {
 }
 
 // Hàm đếm bậc của các đỉnh
-function demCanh() {
+function demBacDinh(dinh = null) {
   const bacDinh = {};
+
+  // Khởi tạo bậc cho từng đỉnh
   cacDinh.forEach((dinh) => {
-    bacDinh[dinh] = 0; // Khởi tạo bậc cho mỗi đỉnh
+    bacDinh[dinh] = 0;
   });
+
+  // Duyệt qua tất cả các cạnh và tăng bậc cho các đỉnh tương ứng
   cacCanh.forEach(([batDau, ketThuc]) => {
-    bacDinh[batDau] += 1; // Tăng bậc cho đỉnh bắt đầu
-    bacDinh[ketThuc] += 1; // Tăng bậc cho đỉnh kết thúc
+    bacDinh[batDau] += 1;
+    bacDinh[ketThuc] += 1;
   });
-  return bacDinh; // Trả về đối tượng chứa bậc của các đỉnh
+  // Nếu có đỉnh được truyền vào thì trả về bậc của đỉnh đó, nếu không trả về tất cả
+  return dinh ? bacDinh[dinh] : bacDinh;
 }
 
 // Hàm kiểm tra tính Euler của đồ thị
 function kiemTraEuler() {
-  const bacDinh = demCanh(); // Tính bậc của các đỉnh
-  console.log("Bậc của các đỉnh là: ", bacDinh); // In ra bậc của các đỉnh
-  const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length; // Đếm số đỉnh bậc lẻ
-  let ketQua = "Không là chu trình Euler"; // Kết quả mặc định
+  const bacDinh = demBacDinh(); // Lấy bậc của tất cả các đỉnh
+  const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length;
+  let ketQua = "Không là chu trình Euler";
+
   if (bacLe == 0) {
-    ketQua = "Là chu trình Euler vì tất cả đỉnh bậc chẵn"; // Nếu tất cả đỉnh bậc chẵn
+    ketQua = "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn";
   } else if (bacLe == 2) {
-    ketQua = "Là nữa chu trình Euler vì có 2 đỉnh bậc lẻ"; // Nếu có 2 đ ỉnh bậc lẻ
+    ketQua = "Là nửa chu trình Euler vì có đúng 2 đỉnh bậc lẻ";
   }
-  $("#ketQua").html(ketQua); // Hiển thị kết quả trên giao diện bằng jQuery
+
+  $("#ketQua").html(ketQua); // Hiển thị kết quả
+}
+
+function taoMaTranKe() {
+  const maTranKe = [];
+  for (let i = 0; i < soDinh; i++) {
+    maTranKe[i] = [];
+    for (let j = 0; j < soDinh; j++) {
+      if (coCanh(cacDinh[i], cacDinh[j])) {
+        maTranKe[i][j] = 1;
+      } else {
+        maTranKe[i][j] = 0;
+      }
+    }
+  }
+  return maTranKe;
+}
+
+function hienThiMaTranKe() {
+  const maTranKe = taoMaTranKe();
+  const table = document.getElementById("maTranKe");
+  table.innerHTML = "";
+  const headerRow = document.createElement("tr");
+  headerRow.innerHTML =
+    "<th></th>" + cacDinh.map((dinh) => `<th>${dinh}</th>`).join("");
+  table.appendChild(headerRow);
+  maTranKe.forEach((row, index) => {
+    const rowElement = document.createElement("tr");
+    rowElement.innerHTML =
+      `<th>${cacDinh[index]}</th>` +
+      row.map((value) => `<td>${value}</td>`).join("");
+    table.appendChild(rowElement);
+  });
 }
