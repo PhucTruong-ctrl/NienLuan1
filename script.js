@@ -6,24 +6,24 @@ let soDinh = 0;
 function veDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
   taoCacDinh(); // Tạo danh sách các đỉnh
-  themCacCanhNgauNhien(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
+  themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
   veDoThiCanvas(); // Vẽ đồ thị lên canvas
   kiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
 }
 
 function xoaDoThi() {
-  window.location.href = window.location.href
+  location.reload(); // Làm mới trang
 }
 
 // Hàm khởi tạo đồ thị
 function khoiTaoDoThi() {
   cacCanh = []; // Khởi tạo danh sách các cạnh
   cacDinh = []; // Khởi tạo danh sách các đỉnh
-  soDinh = document.getElementById("soDinh").value; // Lấy số đỉnh từ input
+  soDinh = $("#soDinh").val(); // Lấy số đỉnh từ input bằng jQuery
 
   // Kiểm tra xem số đỉnh có hợp lệ không
-  if (soDinh < 1 || soDinh > 12) {
-    alert("Hãy nhập số đỉnh từ 1 đến 12");
+  if (soDinh < 2 || soDinh > 12) {
+    alert("Hãy nhập số đỉnh từ 2 đến 12");
     return;
   }
 }
@@ -35,31 +35,50 @@ function taoCacDinh() {
   }
   console.log("Các đỉnh:", cacDinh); // In ra danh sách các đỉnh
 }
+function themCanh(dinhA, dinhB) {
+  // Kiểm tra bậc của đỉnh a và b
+  const bacA = demCanh()[dinhA];
+  const bacB = demCanh()[dinhB];
 
+  // Nếu bậc của đỉnh a hoặc b là 0 thì thêm cạnh
+  if (bacA == 0 || bacB == 0) {
+    // Kiểm tra nếu cạnh không tồn tại thì thêm vào danh sách
+    if (!coCanh(dinhA, dinhB)) {
+      cacCanh.push([dinhA, dinhB]);
+    }
+  }
+}
 // Hàm thêm các cạnh ngẫu nhiên
-function themCacCanhNgauNhien() {
+function themCacCanh() {
   for (let i = 0; i < soDinh; i++) {
     const a = Math.floor(Math.random() * cacDinh.length);
     let b;
     do {
       b = Math.floor(Math.random() * cacDinh.length);
-    } while (a === b); // Đảm bảo b khác a
-
-    // Kiểm tra nếu cạnh không tồn tại thì thêm vào danh sách
-    if (!coCanh(cacDinh[a], cacDinh[b])) {
-      cacCanh.push([cacDinh[a], cacDinh[b]]);
+    } while (a == b); // Đảm bảo b khác a
+    themCanh(cacDinh[a], cacDinh[b]);
+  }
+  // Kiểm tra tất cả các đỉnh và thêm cạnh vào những đỉnh có bậc là 0
+  for (const dinh in demCanh()) { // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+    if (demCanh()[dinh] == 0) {
+      let dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)];
+      while (dinhTemp == dinh) {
+        dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)];
+      }
+      themCanh(dinh, dinhTemp);
     }
   }
-  console.log("Các cạnh ngẫu nhiên:", cacCanh); // In ra danh sách các cạnh
+  console.log("Các cạnh:", cacCanh); // In ra danh sách các cạnh
 }
-
-// Hàm vẽ đồ thị lên canvas
 function veDoThiCanvas() {
-  const canvasContainer = document.getElementById("canvasContainer");
-  canvasContainer.innerHTML = ""; // Xóa nội dung hiện có trong container
-  const canvas = document.createElement("div"); // Tạo div cho canvas
-  canvas.id = "canvas"; // Găn id cho canvas
-  canvasContainer.appendChild(canvas); // Thêm div canvas này thành con của container
+  $("#canvasContainer").empty(); // Xóa nội dung hiện có trong container bằng jQuery
+  const canvas = $("<div></div>"); // Tạo div cho canvas
+  canvas.attr("id", "canvas"); // Gán id cho canvas
+  canvas.css({
+    width: "600px", // Kích thước canvas
+    border: "1px solid black", // Kinh độ canvas
+  });
+  $("#canvasContainer").append(canvas); // Thêm div canvas này thành con của container
 
   // Khởi tạo p5 để vẽ đồ thị
   new p5((p) => {
@@ -135,8 +154,8 @@ function veCacDinh(p, viTri) {
 function coCanh(batDau, ketThuc) {
   return cacCanh.some(
     (canh) =>
-      (canh[0] === batDau && canh[1] === ketThuc) ||
-      (canh[0] === ketThuc && canh[1] === batDau)
+      (canh[0] == batDau && canh[1] == ketThuc) ||
+      (canh[0] == ketThuc && canh[1] == batDau)
   ); // Kiểm tra trong danh sách cạnh
 }
 
@@ -159,10 +178,10 @@ function kiemTraEuler() {
   console.log("Bậc của các đỉnh là: ", bacDinh); // In ra bậc của các đỉnh
   const bacLe = Object.values(bacDinh).filter((bac) => bac % 2 != 0).length; // Đếm số đỉnh bậc lẻ
   let ketQua = "Không là chu trình Euler"; // Kết quả mặc định
-  if (bacLe === 0) {
+  if (bacLe == 0) {
     ketQua = "Là chu trình Euler vì tất cả đỉnh bậc chẵn"; // Nếu tất cả đỉnh bậc chẵn
-  } else if (bacLe === 2) {
-    ketQua = "Là nữa chu trình Euler vì có 2 đỉnh bậc lẻ"; // Nếu có 2 đỉnh bậc lẻ
+  } else if (bacLe == 2) {
+    ketQua = "Là nữa chu trình Euler vì có 2 đỉnh bậc lẻ"; // Nếu có 2 đ ỉnh bậc lẻ
   }
-  document.getElementById("ketQua").innerHTML = ketQua; // Hiển thị kết quả trên giao diện
+  $("#ketQua").html(ketQua); // Hiển thị kết quả trên giao diện bằng jQuery
 }

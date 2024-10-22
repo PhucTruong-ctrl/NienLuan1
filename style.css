@@ -14,3 +14,10 @@ body {
 button {
   margin-top: 20px;
 }
+
+#canvasContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-items: center;
+}
