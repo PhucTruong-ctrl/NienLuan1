@@ -5,11 +5,13 @@ let soDinh = 0;
 // Hàm chính để vẽ đồ thị
 function veDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
-  taoCacDinh(); // Tạo danh sách các đỉnh
-  themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
-  veDoThiCanvas(); // Vẽ đồ thị lên canvas
-  kiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
-  hienThiMaTranKe();
+  if (soDinh <= 4) {
+    taoCacDinh(); // Tạo danh sách các đỉnh
+    themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
+    veDoThiCanvas(); // Vẽ đồ thị lên canvas
+    kiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
+    hienThiMaTranKe();
+  }
 }
 
 function xoaDoThi() {
@@ -23,7 +25,7 @@ function khoiTaoDoThi() {
   soDinh = $("#soDinh").val(); // Lấy số đỉnh từ input bằng jQuery
 
   // Kiểm tra xem số đỉnh có hợp lệ không
-  if (soDinh < 2 || soDinh > 12) {
+  if (soDinh < 2 || soDinh > 4) {
     alert("Hãy nhập số đỉnh từ 2 đến 12");
     return;
   }
@@ -34,7 +36,6 @@ function taoCacDinh() {
   for (let i = 0; i < soDinh; i++) {
     cacDinh.push(String.fromCharCode(65 + i)); // Tạo các đỉnh từ A đến J
   }
-  console.log("Các đỉnh:", cacDinh); // In ra danh sách các đỉnh
 }
 function themCanh(dinhA, dinhB) {
   // Luôn thêm cạnh nếu chưa có
@@ -63,22 +64,29 @@ function themCacCanh() {
       themCanh(dinh, dinhTemp);
     }
   }
-  console.log("Các cạnh:", cacCanh); // In ra danh sách các cạnh
 }
 function veDoThiCanvas() {
   $("#canvasContainer").empty(); // Xóa nội dung hiện có trong container bằng jQuery
+
+  // Tính toán kích thước canvas dựa trên số đỉnh
+  const baseSize = 100; // Kích thước cơ bản cho mỗi đỉnh
+  const canvasWidth = baseSize * Math.ceil(Math.sqrt(soDinh)); // Kích thước chiều rộng
+  const canvasHeight =
+    baseSize * Math.ceil(soDinh / Math.ceil(Math.sqrt(soDinh))); // Kích thước chiều cao
+
   const canvas = $("<div></div>"); // Tạo div cho canvas
   canvas.attr("id", "canvas"); // Gán id cho canvas
   canvas.css({
-    width: "600px", // Kích thước canvas
-    border: "1px solid black", // Kinh độ canvas
+    width: `${canvasWidth}px`, // Kích thước canvas
+    height: `${canvasHeight}px`, // Chiều cao canvas
+    border: "1px solid black", // Biên cho canvas
   });
   $("#canvasContainer").append(canvas); // Thêm div canvas này thành con của container
 
   // Khởi tạo p5 để vẽ đồ thị
   new p5((p) => {
     p.setup = () => {
-      p.createCanvas(600, 600).parent("canvas"); // Tạo canvas
+      p.createCanvas(canvasWidth, canvasHeight).parent("canvas"); // Tạo canvas
       p.background(255); // Thiết lập nền trắng
       const viTri = tinhToaDoDinh(p); // Tính toán vị trí cho các đỉnh
       veCacCanh(p, viTri); // Vẽ các cạnh
@@ -90,15 +98,16 @@ function veDoThiCanvas() {
 // Hàm tính toán vị trí của các đỉnh
 function tinhToaDoDinh(p) {
   const viTri = {};
-  const gridSize = 150; // Kích thước ô lưới
-  const hang = Math.ceil(Math.sqrt(soDinh)); // Tính số hàng
+  const gridSize = Math.min(p.width, p.height) / Math.ceil(Math.sqrt(soDinh)); // Kích thước ô lưới tương ứng với kích thước canvas
+  const hang = Math.floor(Math.sqrt(soDinh)); // Tính số hàng
   const cot = Math.ceil(soDinh / hang); // Tính số cột
 
+  // Tính tọa độ cho các đỉnh
   for (let i = 0; i < soDinh; i++) {
-    const Hang = Math.floor(i / cot);
-    const Cot = i % cot;
-    const x = 200 + Cot * gridSize; // Tính tọa độ x theo cột
-    const y = 50 + Hang * gridSize; // Tính tọa độ y theo hàng
+    const hangIndex = Math.floor(i / cot);
+    const cotIndex = i % cot;
+    const x = cotIndex * gridSize + gridSize / 2; // Tính tọa độ x
+    const y = hangIndex * gridSize + gridSize / 2; // Tính tọa độ y
     viTri[cacDinh[i]] = [x, y]; // Ghi nhận vị trí của đỉnh
   }
 
@@ -116,9 +125,6 @@ function veCacCanh(p, viTri) {
     const [x1, y1] = viTri[batDau]; // Lấy tọa độ của đỉnh bắt đầu
     const [x2, y2] = viTri[ketThuc]; // Lấy tọa độ của đỉnh kết thúc
     p.line(x1, y1, x2, y2); // Vẽ đường thẳng giữa hai đỉnh
-    console.log("Vị trí: ", viTri);
-    console.log("Cạnh: ", canh);
-    console.log("Đỉnh: ", batDau, ketThuc);
   });
 }
 
@@ -137,7 +143,6 @@ function veCacDinh(p, viTri) {
     } else {
       p.fill(0); // Màu đen cho bậc chẵn
     }
-
     p.ellipse(x, y, 20, 20); // Vẽ hình tròn cho đỉnh
     p.textAlign("CENTER"); // Canh giữa văn bản
     p.textSize(16); // Kích thước văn bản
