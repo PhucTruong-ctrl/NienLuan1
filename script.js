@@ -4,8 +4,8 @@ let soDinh = 0;
 
 // Hàm chính để vẽ đồ thị
 function veDoThi() {
+  khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
   if (soDinh <= 4 && soDinh >= 2) {
-    khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
     taoCacDinh(); // Tạo danh sách các đỉnh
     themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
     veDoThiCanvas(); // Vẽ đồ thị lên canvas
