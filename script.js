@@ -95,23 +95,20 @@ function veDoThiCanvas() {
 // Hàm tính toán vị trí của các đỉnh
 function tinhToaDoDinh(p) {
   const viTri = {};
-  const gridSize = Math.min(p.width, p.height) / Math.ceil(Math.sqrt(soDinh)); // Kích thước ô lưới tương ứng với kích thước canvas
-  const hang = Math.floor(Math.sqrt(soDinh)); // Tính số hàng
+  const gridSize = 100; // Kích thước ô lưới
+  const hang = Math.ceil(Math.sqrt(soDinh)); // Tính số hàng
   const cot = Math.ceil(soDinh / hang); // Tính số cột
 
-  // Tính tọa độ cho các đỉnh
   for (let i = 0; i < soDinh; i++) {
-    const hangIndex = Math.floor(i / cot);
-    const cotIndex = i % cot;
-    const x = cotIndex * gridSize + gridSize / 2; // Tính tọa độ x
-    const y = hangIndex * gridSize + gridSize / 2; // Tính tọa độ y
+    const Hang = Math.floor(i / cot);
+    const Cot = i % cot;
+    const x = 50 + Cot * gridSize; // Tính tọa độ x theo cột
+    const y = 50 + Hang * gridSize; // Tính tọa độ y theo hàng
     viTri[cacDinh[i]] = [x, y]; // Ghi nhận vị trí của đỉnh
   }
 
   return viTri; // Trả về vị trí của các đỉnh
-}
-
-// Hàm điều chỉnh tọa độ của các đỉnh
+}// Hàm điều chỉnh tọa độ của các đỉnh
 
 // Hàm vẽ các cạnh của đồ thị
 function veCacCanh(p, viTri) {
