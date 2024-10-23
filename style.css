@@ -3,7 +3,7 @@ body {
   text-align: center;
 }
 
-#ketQua {
+#ketLuan {
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -20,18 +20,18 @@ button {
   place-items: center;
 }
 
-#maTranKe table {
+#maTran table {
   border-collapse: collapse;
 }
 
-#maTranKe th,
-#maTranKe td {
+#maTran th,
+#maTran td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
 }
 
-#maTranKe th {
+#maTran th {
   background-color: #f0f0f0;
 }
 
