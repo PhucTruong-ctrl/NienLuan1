@@ -5,7 +5,7 @@ let soDinh = 0;
 // Hàm chính để vẽ đồ thị
 function veDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
-  if (soDinh <= 4 && soDinh >= 2) {
+  if (soDinh <= 6 && soDinh >= 2) {
     taoCacDinh(); // Tạo danh sách các đỉnh
     themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
     veDoThiCanvas(); // Vẽ đồ thị lên canvas
@@ -67,18 +67,21 @@ function veDoThiCanvas() {
 
   // Tính toán kích thước canvas dựa trên số đỉnh
   const baseSize = 100; // Kích thước cơ bản cho mỗi đỉnh
-  const canvasWidth = baseSize * Math.ceil(Math.sqrt(soDinh)); // Kích thước chiều rộng
-  const canvasHeight =
-    baseSize * Math.ceil(soDinh / Math.ceil(Math.sqrt(soDinh))); // Kích thước chiều cao
+  const hang = Math.ceil(Math.sqrt(soDinh)); // Tính số hàng dựa trên căn bậc hai của số đỉnh
+  const cot = Math.ceil(soDinh / hang); // Tính số cột dựa trên số hàng
+  const canvasWidth = cot * baseSize; // Chiều rộng canvas dựa trên số cột
+  const canvasHeight = hang * baseSize; // Chiều cao canvas dựa trên số hàng
 
+  // Tạo canvas và gán các thuộc tính kích thước
   const canvas = $("<div></div>"); // Tạo div cho canvas
   canvas.attr("id", "canvas"); // Gán id cho canvas
   canvas.css({
-    width: `${canvasWidth}px`, // Kích thước canvas
-    height: `${canvasHeight}px`, // Chiều cao canvas
-    border: "1px solid black", // Biên cho canvas
+    width: `${canvasWidth}px`, // Kích thước chiều rộng canvas
+    height: `${canvasHeight}px`, // Kích thước chiều cao canvas
+    border: "1px solid black", // Đường viền canvas
   });
-  $("#canvasContainer").append(canvas); // Thêm div canvas này thành con của container
+
+  $("#canvasContainer").append(canvas); // Thêm canvas vào container
 
   // Khởi tạo p5 để vẽ đồ thị
   new p5((p) => {
@@ -108,7 +111,7 @@ function tinhToaDoDinh(p) {
   }
 
   return viTri; // Trả về vị trí của các đỉnh
-}// Hàm điều chỉnh tọa độ của các đỉnh
+} // Hàm điều chỉnh tọa độ của các đỉnh
 
 // Hàm vẽ các cạnh của đồ thị
 function veCacCanh(p, viTri) {
