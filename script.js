@@ -5,7 +5,7 @@ let soDinh = 0;
 // Hàm chính để vẽ đồ thị
 function veDoThi() {
   khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
-  if (soDinh <= 4) {
+  if (soDinh <= 4 && soDinh >= 2) {
     taoCacDinh(); // Tạo danh sách các đỉnh
     themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
     veDoThiCanvas(); // Vẽ đồ thị lên canvas
@@ -26,7 +26,7 @@ function khoiTaoDoThi() {
 
   // Kiểm tra xem số đỉnh có hợp lệ không
   if (soDinh < 2 || soDinh > 4) {
-    alert("Hãy nhập số đỉnh từ 2 đến 12");
+    alert("Hãy nhập số đỉnh từ 2 đến 4");
     return;
   }
 }
