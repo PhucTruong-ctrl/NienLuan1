@@ -4,13 +4,16 @@ let soDinh = 0;
 
 // Hàm chính để vẽ đồ thị
 function veDoThi() {
-  khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
   if (soDinh <= 4 && soDinh >= 2) {
+    khoiTaoDoThi(); // Khởi tạo đồ thị, thiết lập số đỉnh và kiểm tra tính hợp lệ
     taoCacDinh(); // Tạo danh sách các đỉnh
     themCacCanh(); // Thêm các cạnh ngẫu nhiên để tạo kết nối
     veDoThiCanvas(); // Vẽ đồ thị lên canvas
     kiemTraEuler(); // Kiểm tra xem đồ thị có chu trình Euler hay không
     hienThiMaTranKe();
+  } else {
+    alert("Hãy nhập số đỉnh từ 2 đến 4");
+    return;
   }
 }
 
@@ -23,12 +26,6 @@ function khoiTaoDoThi() {
   cacCanh = []; // Khởi tạo danh sách các cạnh
   cacDinh = []; // Khởi tạo danh sách các đỉnh
   soDinh = $("#soDinh").val(); // Lấy số đỉnh từ input bằng jQuery
-
-  // Kiểm tra xem số đỉnh có hợp lệ không
-  if (soDinh < 2 || soDinh > 4) {
-    alert("Hãy nhập số đỉnh từ 2 đến 4");
-    return;
-  }
 }
 
 // Hàm tạo các đỉnh
