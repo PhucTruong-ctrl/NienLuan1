@@ -314,11 +314,11 @@ function hienThiMaTran() {
   table.appendChild(tenDinh); // Thêm tenDinh vào table
 
   // Tạo hàng cho mỗi phần tử trong mảng ma trận
-  maTran.forEach(function (row, index) {
+  maTran.forEach(function (hangNgang, index) {
     const hangTable = document.createElement("tr");
     hangTable.innerHTML =
       `<th>${cacDinh[index]}</th>` +
-      row
+      hangNgang
         .map(function (value) {
           // .map là phương thức thực hiện một hàm cho mỗi phần tử trong mảng và trả về một mảng mới.
           return `<td>${value}</td>`;

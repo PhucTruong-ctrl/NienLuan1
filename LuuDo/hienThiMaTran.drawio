@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Trang-1" id="jUxZARPxvetQINOrXNNo">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="u1jP8M1oAtB5fD3ErIQu-1" target="u1jP8M1oAtB5fD3ErIQu-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-1" value="Bắt đầu hiển thị" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u1jP8M1oAtB5fD3ErIQu-2" target="u1jP8M1oAtB5fD3ErIQu-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="u1jP8M1oAtB5fD3ErIQu-2" target="u1jP8M1oAtB5fD3ErIQu-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-2" value="Cho mảng maTran có giá trị của hàm con taoMaTran" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-3" value="taoMaTran" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="u1jP8M1oAtB5fD3ErIQu-6" target="u1jP8M1oAtB5fD3ErIQu-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-6" value="Với mỗi đỉnh trong cacDinh đặt &amp;lt;th&amp;gt; &amp;lt;/th&amp;gt; cho đỉnh đó.&lt;br&gt;VD: &amp;lt;th&amp;gt;A&amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;B&amp;lt;/th&amp;gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="343" y="210" width="165" height="82.5" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="u1jP8M1oAtB5fD3ErIQu-8" target="u1jP8M1oAtB5fD3ErIQu-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-8" value="Duyệt qua các phần tử của maTran" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="u1jP8M1oAtB5fD3ErIQu-10" target="u1jP8M1oAtB5fD3ErIQu-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-10" value="Với mỗi đỉnh trong cacDinh thì đặt &amp;lt;th&amp;gt;Đỉnh&amp;lt;/th&amp;gt; + &amp;lt;td&amp;gt;hangNgang&amp;lt;/td&amp;gt; cộng thêm một hàng từ maTran.&lt;br&gt;VD: Cộng hàng đầu của maTran ta được hangNgang = [0,1,0,1]" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="293" y="408" width="265" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="u1jP8M1oAtB5fD3ErIQu-13" value="Kết thúc" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
