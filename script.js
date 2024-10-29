@@ -47,7 +47,7 @@ function themCanh(dinhA, dinhB) {
 
 function themCacCanh() {
   // Hàm thêm cạnh ngẫu nhiên
-  for (let i = 0; i < soDinh; i++) {
+  for (let i = 0; i < soDinh * 2; i++) {
     // Vòng lặp từ 0 đến số đỉnh.
     const a = Math.floor(Math.random() * cacDinh.length); // Chọn số ngẫu nhiên từ số lượng đỉnh.
     let b;
