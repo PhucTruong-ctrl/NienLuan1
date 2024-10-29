@@ -29,10 +29,16 @@ button {
   border: 1px solid #000000;
   padding: 10px;
   text-align: center;
+  margin-left: 20px;
 }
 
 #maTran th {
   background-color: #f0f0f0;
+}
+
+#maTraKe {
+  margin-left: 20px;
+  border-style: solid;
 }
 
 .ketQuaEuler {
