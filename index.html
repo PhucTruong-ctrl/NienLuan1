@@ -3,31 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kiểm tra chu trình Euler</title>
-    <link rel="stylesheet" href="Styles/style.css" />
-    <script src="Scripts/jquery-3.7.1.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"
-      integrity="sha512-lvddmeF7aHRJwdbJeYThWd5kWSjTrXBzCRF/jYROiHzmhMJ1dEXfGH5Q7ft0yhizXTopAETG03s5ajTflauijA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <title>Niên luận 1</title>
   </head>
   <body>
-    <h1>Kiểm tra chu trình Euler Ngẫu nhiên</h1>
-    <div id="inputContainer">
-      <label for="soDinh">Nhập số đỉnh:</label>
-      <input type="number" id="soDinh" min="2" max="12" value="4" />
-    </div>
-    <button onclick="xoaDoThi()">Xoá</button>
-    <button onclick="veDoThi()">Vẽ Ngẫu Nhiên</button>
-    <div id="ketLuan"></div>
-    <div class="ketQuaEuler">
-      <div id="canvasContainer"></div>
-      <div id="maTraKe">
-        <div id="maTran"></div>
-      </div>
-    </div>
-    <script src="Scripts/mainScript.js"></script>
+    <h1>Hãy chọn cách thức vẽ chu trình Euler!</h1>
+    <a href="Pages/fromFileEuler.html">
+      <button class="luaChon" id="veTuFile">Vẽ bằng dữ liệu TXT</button>
+    </a>
+    <a href="Pages/manualEuler.html">
+      <button class="luaChon" id="veThuCong">Vẽ thủ công</button>
+    </a>
+    <a href="Pages/randomEuler.html">
+      <button class="luaChon" id="veNgauNhien">Vẽ ngẫu nhiên</button>
+    </a>
   </body>
 </html>

@@ -9,10 +9,6 @@ body {
   margin-bottom: 20px;
 }
 
-button {
-  margin-top: 20px;
-}
-
 #canvasContainer {
   display: flex;
   flex-direction: column;
@@ -44,4 +40,10 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#trangChu {
+  position: fixed;
+  left: 1%;
+  top: 1%;
 }
