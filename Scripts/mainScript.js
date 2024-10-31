@@ -2,20 +2,12 @@ let cacCanh = []; // Mảng chứa cạnh
 let cacDinh = []; // Mảng chứa đỉnh
 let soDinh = 0; // Số đỉnh
 
-function veDoThi() {
-  // Hàm tổng
-  khoiTaoDoThi();
-  if (soDinh <= 12 && soDinh >= 2) {
-    // Đảm bảo đỉnh vẽ ra chuẩn
-    taoCacDinh();
-    themCacCanh();
-    veDoThiCanvas();
-    kiemTraEuler();
-    hienThiMaTran();
-  } else {
-    alert("Hãy nhập số đỉnh từ 2 đến 12");
-    return;
-  }
+function khoiTaoDoThi() {
+  cacCanh = []; // Đặt lại để đảm bảo không bị cộng dồn
+  cacDinh = [];
+  soDinh = $("#soDinh").val(); // Lấy dữ liệu từ người dùng
+  $("#canhContainer").empty(); // Xóa các input cũ
+  $("#ketLuan").empty(); // Xóa kết luận cũ nếu có
 }
 
 function xoaDoThi() {
@@ -23,49 +15,16 @@ function xoaDoThi() {
   location.reload(); // Reload lại trang
 }
 
-function khoiTaoDoThi() {
-  // Hàm khởi tạo đồ thị
-  cacCanh = []; // Đặt lại để đảm bảo không bị cộng dồn
-  cacDinh = [];
-  soDinh = $("#soDinh").val(); // Lấy dữ liệu từ người dùng
-}
-
 function taoCacDinh() {
-  // Hàm tạo các đỉnh
   for (let i = 0; i < soDinh; i++) {
-    // Vòng lặp từ 0 đến số đỉnh.
-    cacDinh.push(String.fromCharCode(65 + i)); // Thêm kí tự A+i vào mảng các đỉnh.
+    cacDinh.push(String.fromCharCode(65 + i)); // Thêm kí tự A+i vào mảng các đỉnh
   }
 }
+
 function themCanh(dinhA, dinhB) {
-  // Hàm thêm cạnh
   if (!coCanh(dinhA, dinhB)) {
     // Kiểm tra hai đỉnh đó đã có cạnh với nhau chưa
     cacCanh.push([dinhA, dinhB]); // Thêm hai đỉnh đó vào một phần tử của mảng các cạnh
-  }
-}
-
-function themCacCanh() {
-  // Hàm thêm cạnh ngẫu nhiên
-  for (let i = 0; i < soDinh * 2; i++) {
-    // Vòng lặp từ 0 đến số đỉnh.
-    const a = Math.floor(Math.random() * cacDinh.length); // Chọn số ngẫu nhiên từ số lượng đỉnh.
-    let b;
-    do {
-      b = Math.floor(Math.random() * cacDinh.length); // Chọn số ngẫu nhiên từ số lượng đỉnh.
-    } while (a == b); // Đảm bảo a luôn khác b
-    themCanh(cacDinh[a], cacDinh[b]); // Thêm cạnh của 2 đỉnh đó vào mảng.
-  }
-  for (const dinh of cacDinh) {
-    // for ... of ([A:1, B:2, C:3] thì sẽ trả về A,B,C) là dùng để lặp qua tên của đối tượng trong mảng, for ... in ([A:1, B:2, C:3] thì sẽ trả về 1,2,3) lặp qua giá trị của đối tượng đó.
-    if (demBacDinh(dinh) == 0) {
-      // Nếu đỉnh đó = 0 (Cô đơn) thì thêm cạnh của đỉnh đó với đỉnh ngẫu nhiên khác.
-      let dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)]; // Chọn số ngẫu nhiên từ số lượng đỉnh.
-      while (dinhTemp == dinh) {
-        dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)]; // Chọn số ngẫu nhiên từ số lượng đỉnh.
-      }
-      themCanh(dinh, dinhTemp); // Thêm cạnh của 2 đỉnh đó vào mảng.
-    }
   }
 }
 
@@ -113,13 +72,13 @@ function tinhToaDoDinh() {
     const x = 50 + Cot * gridSize;
     const y = 50 + Hang * gridSize;
     /* Mỗi lần lặp sẽ tính Hang và Cot, sau đó nhân cho khoảng cách giữa các đỉnh (gridSize)
-    VD: hang = 3, cot = 2. 
-    Hang 0 / 2 = 0; 1/2 = 0.5 = 0; 2/2 = 1; 3/2 = 1.5 = 1;
-    Cot  0 % 2 = 0; 1 % 2 = 1; 2 % 2 = 0; 3 % 2 = 1. 
-    x = 50 + 0 * 100 = 50; y = 50 + 0 * 100 = 50; A = [50,50]
-    x = 50 + 1 x 100 = 150; y = 50 + 0 * 100 = 50; B = [150,50]
-    x = 50 + 0 * 100 = 50; y = 50 + 1 * 100 = 150; C = [50,150]
-    x = 50 + 1 * 100 = 150; y = 50 + 1 * 100 = 150; D = [150,150] */
+      VD: hang = 3, cot = 2. 
+      Hang 0 / 2 = 0; 1/2 = 0.5 = 0; 2/2 = 1; 3/2 = 1.5 = 1;
+      Cot  0 % 2 = 0; 1 % 2 = 1; 2 % 2 = 0; 3 % 2 = 1. 
+      x = 50 + 0 * 100 = 50; y = 50 + 0 * 100 = 50; A = [50,50]
+      x = 50 + 1 x 100 = 150; y = 50 + 0 * 100 = 50; B = [150,50]
+      x = 50 + 0 * 100 = 50; y = 50 + 1 * 100 = 150; C = [50,150]
+      x = 50 + 1 * 100 = 150; y = 50 + 1 * 100 = 150; D = [150,150] */
     viTri[cacDinh[i]] = [x, y]; // Gán vị trí cho các đỉnh đó vào mảng chứa vị trí. VD: {A:[50,50],B:[150,50],C:[50,150],D:[150,150]}
   }
   return viTri;
@@ -133,16 +92,16 @@ function veCacCanh(p, viTri) {
     // Duyệt qua các phần tử trong mảng cacCanh VD: [{0:["A","B"]}]
     const [dinhHienTai, dinhTiepTheo] = canh;
     /* canh là mảng có hai phần tử VD: ["A","B"]
-    sau đó gán cho dinhHienTai = A, dinhTiepTheo = B. */
+      sau đó gán cho dinhHienTai = A, dinhTiepTheo = B. */
 
     const [x1, y1] = viTri[dinhHienTai];
     const [x2, y2] = viTri[dinhTiepTheo];
     /* Sau đó gán cho x1 = Vị trí của X A, y1 = Vị trí của Y A
-    x2 = Vị trí của X B, y2 = Vị trí của Y B
-    VD: dinhHienTai = 'A' nên vị trí trong mảng 
-    viTri = {A:[50,50],B:[150,50]} vậy là x1 = 50, y1 = 50; 
-    dinhTiepTheo = 'B' nên vị trí là x2 = 150, y2 = 50;
-    */
+      x2 = Vị trí của X B, y2 = Vị trí của Y B
+      VD: dinhHienTai = 'A' nên vị trí trong mảng 
+      viTri = {A:[50,50],B:[150,50]} vậy là x1 = 50, y1 = 50; 
+      dinhTiepTheo = 'B' nên vị trí là x2 = 150, y2 = 50;
+      */
     p.line(x1, y1, x2, y2); // Vẽ đường từ X Y đến X Y. VD từ toạ độ 50,50 vẽ đến 150,50
   });
 }
@@ -155,14 +114,14 @@ function veCacDinh(p, viTri) {
     // Duyệt qua mảng vị trí
     const [x, y] = viTri[dinh];
     /* Gắn giá trị vị trí của đỉnh hiện tại cho x,y. 
-    VD: Ta có mảng {A:[50,50],B:[150,50],C:[50,150],D:[150,150]}
-     biến dinh là 0 thì x,y là 50,50; Tức x = 50, y = 50.
-     */
+      VD: Ta có mảng {A:[50,50],B:[150,50],C:[50,150],D:[150,150]}
+       biến dinh là 0 thì x,y là 50,50; Tức x = 50, y = 50.
+       */
     const bac = bacDinh[dinh];
     /* Lấy giá trị của bậc đỉnh hiện tại
-    VD: Ta có {A:0,B:1,C:0,D:1}
-    biến dinh là 0 thì bac = 0;
-     */
+      VD: Ta có {A:0,B:1,C:0,D:1}
+      biến dinh là 0 thì bac = 0;
+       */
     if (bac % 2 !== 0) {
       // Kiểm tra đỉnh bậc lẽ hay chẵn
       p.fill(255, 0, 0); // Nếu lẽ thì là màu đỏ
@@ -192,9 +151,9 @@ function coCanh(dinhHienTai, dinhTiepTheo) {
 }
 function demBacDinh(dinh = null) {
   /* Hàm này trả về vị trí của một đỉnh nếu có đầu vào, còn không thì trả về tất cả bậc của tất cả đỉnh. 
-  VD: Nếu có đầu vào là A: trả về bacDinh[A:0].
-  Còn không thì trả về: bacDinh = {A:0,B:2,C:0,D:2}.
-  */
+    VD: Nếu có đầu vào là A: trả về bacDinh[A:0].
+    Còn không thì trả về: bacDinh = {A:0,B:2,C:0,D:2}.
+    */
   const bacDinh = {};
   cacDinh.forEach((dinh) => {
     // Duyệt qua tất cả các đỉnh trong mảng cacDinh
@@ -211,27 +170,56 @@ function demBacDinh(dinh = null) {
   // Nếu có đỉnh đầu vào thì trả về bacDinh[dinh]. Không thì trả về bacDinh
 }
 
+function kiemTraLienThong() {
+  const visited = new Set();
+
+  function dfs(dinh) {
+    visited.add(dinh);
+    cacCanh.forEach(([dinhA, dinhB]) => {
+      if (dinhA === dinh && !visited.has(dinhB)) {
+        dfs(dinhB);
+      }
+      if (dinhB === dinh && !visited.has(dinhA)) {
+        dfs(dinhA);
+      }
+    });
+  }
+
+  dfs(cacDinh[0]);
+
+  return visited.size === cacDinh.length;
+}
+
+// Hàm kiểm tra Euler
 function kiemTraEuler() {
-  const bacDinh = demBacDinh(); // Lấy tất cả bậc của tât cả đỉnh
+  const bacDinh = demBacDinh(); // Lấy tất cả bậc của tất cả đỉnh
   let bacLe = 0;
+
+  // Đếm số đỉnh bậc lẻ
   for (const dinh in bacDinh) {
-    if (bacDinh[dinh] % 2 != 0) {
-      // Nếu đỉnh hiện tại trong mảng bacDinh là lẻ thì bacLe + 1
-      // VD: bacDinh = { A: 1, B: 3, C: 1, D: 2, E: 2, F: 3 } thì bacLe = 4
+    if (bacDinh[dinh] % 2 !== 0) {
       bacLe++;
     }
   }
-  let ketLuan; // Kết luận của đồ thị
-  if (bacLe == 0) {
-    ketLuan = "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn";
-  } else if (bacLe == 2) {
-    ketLuan = "Là nửa chu trình Euler vì có đúng 2 đỉnh bậc lẻ";
+
+  let ketLuan;
+
+  if (kiemTraLienThong()) {
+    if (bacLe === 0) {
+      ketLuan =
+        "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn và đồ thị liên thông";
+    } else if (bacLe === 2) {
+      ketLuan =
+        "Là nửa chu trình Euler vì có đúng 2 đỉnh bậc lẻ và đồ thị liên thông";
+    } else {
+      ketLuan = "Không là chu trình Euler";
+    }
   } else {
-    ketLuan = "Không là chu trình Euler";
+    ketLuan = "Không là chu trình Euler vì đồ thị không liên thông";
   }
+
   $("#ketLuan").html(ketLuan); // Hiển thị kết luận ra HTML
 }
-
 function taoMaTran() {
   // Hàm này sẽ tạo ra một mảng 2 chiều tượng trưng cho ma trận kề của đồ thị.
   const maTran = []; // Tạo mảng maTran một chiều
@@ -240,13 +228,13 @@ function taoMaTran() {
 
     maTran[i] = [];
     /* Với mỗi i tạo thêm mảng một chiều.
-    VD: soDinh = 4, thì 
-     maTran = [ 
-                [], 
-                [], 
-                [], 
-                [] 
-              ] */
+      VD: soDinh = 4, thì 
+       maTran = [ 
+                  [], 
+                  [], 
+                  [], 
+                  [] 
+                ] */
 
     for (let j = 0; j < soDinh; j++) {
       // Vòng lặp j chạy từ 0 đến số đỉnh
@@ -257,34 +245,34 @@ function taoMaTran() {
         maTran[i][j] = 0;
       }
       /* VD: soDinh = 4, cacDinh = [A,B,C,D], 
-      cacCanh = [0:["A", "B"], 1:["B", "C"], 2:["C", "D"], 3:["D", "A"]] 
-      i = 0, j = 0, coCanh(A, A) = false thì maTran[0][0] = 0.
-      i = 0, j = 1, coCanh(A, B) = true thì maTran[0][1] = 1. 
-      i = 0, j = 2, coCanh(A, C) = false thì maTran[0][2] = 0.
-      i = 0, j = 3, coCanh(A, D) = true thì maTran[0][3] = 1.
-
-      i = 1, j = 0, coCanh(B, A) = true thì maTran[1][0] = 1.
-      i = 1, j = 1, coCanh(B, B) = false thì maTran[1][1] = 0.
-      i = 1, j = 2, coCanh(B, C) = true thì maTran[1][2] = 1.
-      i = 1, j = 3, coCanh(B, D) = false thì maTran[1][3] = 0.
-
-      i = 2, j = 0, coCanh(C, A) = false thì maTran[2][0] = 0.
-      i = 2, j = 1, coCanh(C, B) = true thì maTran[2][1] = 1.
-      i = 2, j = 2, coCanh(C, C) = false thì maTran[2][2] = 0.
-      i = 2, j = 3, coCanh(C, D) = true thì maTran[2][3] = 1.
-
-      i = 3, j = 0, coCanh(D, A) = true thì maTran[3][0] = 1.
-      i = 3, j = 1, coCanh(D, B) = false thì maTran[3][1] = 0.
-      i = 3, j = 2, coCanh(D, C) = true thì maTran[3][2] = 1.
-      i = 3, j = 3, coCanh(D, D) = false thì maTran[3][3] = 0.
-      Vậy ta có: 
-      maTran = [
-      [0,1,0,1],
-      [1,0,1,0],
-      [0,1,0,1],
-      [1,0,1,0],
-      ];
-      */
+        cacCanh = [0:["A", "B"], 1:["B", "C"], 2:["C", "D"], 3:["D", "A"]] 
+        i = 0, j = 0, coCanh(A, A) = false thì maTran[0][0] = 0.
+        i = 0, j = 1, coCanh(A, B) = true thì maTran[0][1] = 1. 
+        i = 0, j = 2, coCanh(A, C) = false thì maTran[0][2] = 0.
+        i = 0, j = 3, coCanh(A, D) = true thì maTran[0][3] = 1.
+  
+        i = 1, j = 0, coCanh(B, A) = true thì maTran[1][0] = 1.
+        i = 1, j = 1, coCanh(B, B) = false thì maTran[1][1] = 0.
+        i = 1, j = 2, coCanh(B, C) = true thì maTran[1][2] = 1.
+        i = 1, j = 3, coCanh(B, D) = false thì maTran[1][3] = 0.
+  
+        i = 2, j = 0, coCanh(C, A) = false thì maTran[2][0] = 0.
+        i = 2, j = 1, coCanh(C, B) = true thì maTran[2][1] = 1.
+        i = 2, j = 2, coCanh(C, C) = false thì maTran[2][2] = 0.
+        i = 2, j = 3, coCanh(C, D) = true thì maTran[2][3] = 1.
+  
+        i = 3, j = 0, coCanh(D, A) = true thì maTran[3][0] = 1.
+        i = 3, j = 1, coCanh(D, B) = false thì maTran[3][1] = 0.
+        i = 3, j = 2, coCanh(D, C) = true thì maTran[3][2] = 1.
+        i = 3, j = 3, coCanh(D, D) = false thì maTran[3][3] = 0.
+        Vậy ta có: 
+        maTran = [
+        [0,1,0,1],
+        [1,0,1,0],
+        [0,1,0,1],
+        [1,0,1,0],
+        ];
+        */
     }
   }
   return maTran; // Trả về mảng 2 chiều maTran
@@ -308,9 +296,9 @@ function hienThiMaTran() {
       .join("");
   // .join biến đổi một mảng nhiều string thành một string. VD: cacDinh = ["A","B","C","D"] thì sau khi join sẽ thành "A B C D"
   /* 
-    VD: cacDinh = [A, B, C, D]
-    tenDinh.innerHTML = "<th></th><th>A</th><th>B</th><th>C</th><th>D</th>"
-  */
+      VD: cacDinh = [A, B, C, D]
+      tenDinh.innerHTML = "<th></th><th>A</th><th>B</th><th>C</th><th>D</th>"
+    */
   table.appendChild(tenDinh); // Thêm tenDinh vào table
 
   // Tạo hàng cho mỗi phần tử trong mảng ma trận
@@ -327,14 +315,14 @@ function hienThiMaTran() {
     // .join biến đổi một mảng nhiều string thành một string. VD: cacDinh = ["A","B","C","D"] thì sau khi join sẽ thành "A B C D"
 
     /* 
-      VD: maTran = [
-        [0, 1, 0, 1],
-        [1, 0, 1, 0],
-        [0, 1, 0, 1],
-        [1, 0, 1, 0]
-      ]
-      hangTable.innerHTML = "<th>A</th><td>0</td><td>1</td><td>0</td><td>1</td>"
-    */
+        VD: maTran = [
+          [0, 1, 0, 1],
+          [1, 0, 1, 0],
+          [0, 1, 0, 1],
+          [1, 0, 1, 0]
+        ]
+        hangTable.innerHTML = "<th>A</th><td>0</td><td>1</td><td>0</td><td>1</td>"
+      */
     table.appendChild(hangTable); // Thêm hangTable vào table
   });
 }

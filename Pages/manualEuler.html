@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../Styles/style.css" />
+    <script src="../Scripts/jquery-3.7.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"
+      integrity="sha512-lvddmeF7aHRJwdbJeYThWd5kWSjTrXBzCRF/jYROiHzmhMJ1dEXfGH5Q7ft0yhizXTopAETG03s5ajTflauijA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <title>Vẽ chu trình Euler thủ công</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <h1>Vẽ chu trình Euler thủ công</h1>
+    <a href="../index.html"><button id="trangChu">Trang chủ</button></a>
+    <div id="inputContainer">
+      <label for="soDinh">Nhập số đỉnh:</label>
+      <input type="number" id="soDinh" min="2" max="12" value="4" /> <br />
+    </div>
+
+    <button id="button-xoa" onclick="xoaDoThi()">Xoá</button>
+    <br />
+    <button id="button-tao" onclick="taoDoThi()">Tạo</button>
+
+    <div id="canhContainer"></div>
+    <button id="button-them" onclick="veDoThi()">Thêm</button>
+    <div id="ketLuan"></div>
+    <div class="ketQuaEuler">
+      <div id="canvasContainer"></div>
+      <div id="maTraKe">
+        <div id="maTran"></div>
+      </div>
+    </div>
+    <script src="../Scripts/mainScript.js"></script>
+    <script src="../Scripts/manualEuler.js"></script>
+  </body>
 </html>
