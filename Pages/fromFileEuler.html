@@ -16,9 +16,10 @@
   <body>
     <a href="../index.html"><button id="trangChu">Trang chủ</button></a>
     <h1>Vẽ Chu trình Euler bằng file txt</h1>
-    <div id="inputContainer">
-      <input type="file" id="file-input" accept=".txt"/>
-    </div>
+    <form id="inputContainer">
+      <input type="file" id="file-input" accept=".txt" />
+      <input type="reset">
+    </form>
     <button id="button-xoa" onclick="xoaDoThi()">Xoá</button>
     <button onclick="veDoThi()">Vẽ</button>
     <div id="ketLuan"></div>
