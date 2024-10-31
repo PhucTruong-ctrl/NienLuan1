@@ -1,6 +1,14 @@
 let cacCanh = []; // Mảng chứa cạnh
 let cacDinh = []; // Mảng chứa đỉnh
 let soDinh = 0; // Số đỉnh
+let soCanh = 0; // Số cạnh
+
+$(document).ready(function () {
+  $("#button-them").hide();
+  $("#button-themCanh").hide();
+  $("#button-ve").hide();  
+  $("#button-xoa").hide(); 
+});
 
 function khoiTaoDoThi() {
   cacCanh = []; // Đặt lại để đảm bảo không bị cộng dồn
