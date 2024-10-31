@@ -13,5 +13,22 @@
     ></script>
     <title>Vẽ chu trình Euler bằng file txt</title>
   </head>
-  <body></body>
+  <body>
+    <a href="../index.html"><button id="trangChu">Trang chủ</button></a>
+    <h1>Vẽ Chu trình Euler bằng file txt</h1>
+    <div id="inputContainer">
+      <input type="file" id="file-input" accept=".txt"/>
+    </div>
+    <button id="button-xoa" onclick="xoaDoThi()">Xoá</button>
+    <button onclick="veDoThi()">Vẽ</button>
+    <div id="ketLuan"></div>
+    <div class="ketQuaEuler">
+      <div id="canvasContainer"></div>
+      <div id="maTraKe">
+        <div id="maTran"></div>
+      </div>
+    </div>
+    <script src="../Scripts/mainScript.js"></script>
+    <script src="../Scripts/fromFileEuler.js"></script>
+  </body>
 </html>

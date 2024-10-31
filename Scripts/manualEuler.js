@@ -26,6 +26,7 @@ function taoDoThi() {
    - Hiển thị kết luận về chu trình Euler */
 function veDoThi() {
   if (soDinh <= 12 && soDinh >= 2) {
+    layVaThemCanh();
     veDoThiCanvas();
     hienThiMaTran();
     kiemTraEuler();
