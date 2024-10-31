@@ -3,6 +3,7 @@ function veDoThi() {
   khoiTaoDoThi();
   if (soDinh <= 12 && soDinh >= 2) {
     // Đảm bảo đỉnh vẽ ra chuẩn
+    $("#button-xoa").show();
     taoCacDinh();
     themCacCanh();
     veDoThiCanvas();
