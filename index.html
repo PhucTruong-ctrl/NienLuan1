@@ -3,18 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="Styles/index.css" />
     <title>Niên luận 1</title>
   </head>
   <body>
-    <h1>Hãy chọn cách thức vẽ chu trình Euler!</h1>
-    <a href="Pages/fromFileEuler.html">
-      <button class="luaChon" id="veTuFile">Vẽ bằng dữ liệu TXT</button>
-    </a>
-    <a href="Pages/manualEuler.html">
-      <button class="luaChon" id="veThuCong">Vẽ thủ công</button>
-    </a>
-    <a href="Pages/randomEuler.html">
-      <button class="luaChon" id="veNgauNhien">Vẽ ngẫu nhiên</button>
-    </a>
+    <div class="container">
+      <h1>
+        <i class="fas fa-project-diagram"></i>
+        Vẽ chu trình Euler
+      </h1>
+
+      <div class="options">
+        <div class="option-card">
+          <i class="fas fa-file-upload"></i>
+          <h3>Vẽ bằng dữ liệu TXT</h3>
+          <p>Tải lên file txt chứa dữ liệu đồ thị của bạn</p>
+          <a href="Pages/fromFileEuler.html" class="luaChon">Bắt đầu</a>
+        </div>
+
+        <div class="option-card">
+          <i class="fas fa-pencil-alt"></i>
+          <h3>Vẽ thủ công</h3>
+          <p>Tự tay vẽ và chỉnh sửa đồ thị</p>
+          <a href="Pages/manualEuler.html" class="luaChon">Bắt đầu</a>
+        </div>
+
+        <div class="option-card">
+          <i class="fas fa-random"></i>
+          <h3>Vẽ ngẫu nhiên</h3>
+          <p>Tạo đồ thị ngẫu nhiên tự động</p>
+          <a href="Pages/randomEuler.html" class="luaChon">Bắt đầu</a>
+        </div>
+      </div>
+    </div>
   </body>
+  <footer>
+    <p>© 2024 - Niên luận 1. Viết bởi Phúc - 227060168</p>
+    <div class="social-links">
+      <a href="https://github.com/PhucTruong-ctrl/NienLuan1"
+        ><i class="fab fa-github"></i>
+      </a>
+    </div>
+  </footer>
 </html>

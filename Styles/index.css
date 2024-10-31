@@ -1,0 +1,111 @@
+body {
+  font-family: Roboto;
+  background-color: #efffc8;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+footer {
+  font-family: Roboto;
+  margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #0d0a0b;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  color: #0d0a0b;
+  text-align: center;
+  font-size: 40px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.option-card {
+  background-color: #f3eff5;
+  padding: 30px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-10px);
+}
+
+.option-card i {
+  font-size: 3em;
+  color: #72b01d;
+  margin-bottom: 20px;
+}
+
+.option-card h3 {
+  color: #0d0a0b;
+  margin-bottom: 15px;
+}
+
+.option-card p {
+  color: #454955;
+  margin-bottom: 20px;
+}
+
+.option-card .luaChon {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3f7d20;
+  color: #f3eff5;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.option-card .luaChon:hover {
+  background-color: #72b01d;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+  h1 {
+    font-size: 32px;
+  }
+  .option-card {
+    padding: 20px;
+  }
+}
+
+.social-links a {
+  color: #0d0a0b;
+  margin: 0 10px;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #454955;
+}
