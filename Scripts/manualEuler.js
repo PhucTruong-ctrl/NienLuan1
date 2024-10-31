@@ -1,39 +1,4 @@
 let inputCount = 0;
-
-function taoDoThi() {
-  khoiTaoDoThi();
-  if (soDinh <= 12 && soDinh >= 2) {
-    taoCacDinh();
-    hienThiDinh();
-    $("#button-xoa").show();
-    $("#button-them").show();
-    $("#button-themCanh").show();
-    $("#button-ve").show();
-  }
-}
-
-function veDoThi() {
-  if (soDinh <= 12 && soDinh >= 2) {
-    veDoThiCanvas();
-    hienThiMaTran();
-    kiemTraEuler();
-  }
-}
-
-function hienThiDinh() {
-  // Reset lại số cạnh mỗi lần hiển thị đỉnh mới
-  soCanh = cacDinh.length;
-
-  cacDinh.forEach((dinh) => {
-    const label = $("<label></label>").text(`${dinh}: `);
-    const input = $("<input>")
-      .attr("id", `input-${dinh}-${inputCount}`)
-      .attr("placeholder", "Nhập đỉnh kết nối");
-    $("#canhContainer").append(label).append(input).append("<br />");
-  });
-  inputCount++;
-}
-
 function taoDoThi() {
   khoiTaoDoThi();
   if (soDinh <= 12 && soDinh >= 2) {
