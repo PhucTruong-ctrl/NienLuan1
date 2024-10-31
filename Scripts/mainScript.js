@@ -1,7 +1,6 @@
 let cacCanh = []; // Mảng chứa cạnh
 let cacDinh = []; // Mảng chứa đỉnh
 let soDinh = 0; // Số đỉnh
-let soCanh = 0; // Số cạnh
 
 $(document).ready(function () {
   $("#button-them").hide();

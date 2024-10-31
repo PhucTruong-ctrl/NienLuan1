@@ -1,11 +1,12 @@
 let inputCount = 0;
+
 function taoDoThi() {
   khoiTaoDoThi();
   if (soDinh <= 12 && soDinh >= 2) {
     taoCacDinh();
     hienThiDinh();
-    $("#button-xoa").show(); // Hiển thị nút Thêm sau khi nhấn Tạo
-    $("#button-them").show(); // Hiển thị nút Thêm sau khi nhấn Tạo
+    $("#button-xoa").show();
+    $("#button-them").show();
     $("#button-themCanh").show();
     $("#button-ve").show();
   }
@@ -20,9 +21,10 @@ function veDoThi() {
 }
 
 function hienThiDinh() {
+  // Reset lại số cạnh mỗi lần hiển thị đỉnh mới
+  soCanh = cacDinh.length;
+
   cacDinh.forEach((dinh) => {
-    soCanh++;
-    console.log(soCanh);
     const label = $("<label></label>").text(`${dinh}: `);
     const input = $("<input>")
       .attr("id", `input-${dinh}-${inputCount}`)
@@ -32,17 +34,50 @@ function hienThiDinh() {
   inputCount++;
 }
 
-// Hàm xử lý khi nhấn nút Thêm
-function layVaThemCanh() {
-  for (let i = 0; i < soCanh; i++) {
-    for (let j = 0; j < cacDinh.length; j++) {
-      const dinh = cacDinh[j];
-      const ketNoi = $(`#input-${dinh}-${i}`).val(); // Lấy giá trị từ input
-      if (ketNoi && cacDinh.includes(ketNoi)) {
-        // Kiểm tra đỉnh có tồn tại không
-        themCanh(dinh, ketNoi);
-      }
-    }
+function taoDoThi() {
+  khoiTaoDoThi();
+  if (soDinh <= 12 && soDinh >= 2) {
+    taoCacDinh();
+    hienThiDinh();
+    $("#button-xoa").show();
+    $("#button-them").show();
+    $("#button-themCanh").show();
+    $("#button-ve").show();
   }
-  console.log("Các cạnh hiện tại:", cacCanh); // Kiểm tra các cạnh đã thêm
+}
+
+function veDoThi() {
+  if (soDinh <= 12 && soDinh >= 2) {
+    veDoThiCanvas();
+    hienThiMaTran();
+    kiemTraEuler();
+  }
+}
+
+function hienThiDinh() {
+  // Reset lại số cạnh mỗi lần hiển thị đỉnh mới
+  cacDinh.forEach((dinh) => {
+    const label = $("<label></label>").text(`${dinh}: `);
+    const input = $("<input>")
+      .attr("id", `input-${dinh}-${inputCount}`)
+      .attr("placeholder", "Nhập đỉnh kết nối");
+    $("#canhContainer").append(label).append(input).append("<br />");
+  });
+  inputCount++;
+}
+
+function layVaThemCanh() {
+  // Lấy tất cả các input trong canhContainer
+  $("#canhContainer input").each(function () {
+    const inputId = $(this).attr("id");
+    const [, dinh] = inputId.split("-");
+    const ketNoi = $(this).val().trim();
+
+    // Chỉ thêm cạnh nếu input có giá trị và đỉnh kết nối hợp lệ
+    if (ketNoi && cacDinh.includes(ketNoi) && dinh !== ketNoi) {
+      themCanh(dinh, ketNoi);
+    }
+  });
+
+  console.log("Các cạnh hiện tại:", cacCanh);
 }
