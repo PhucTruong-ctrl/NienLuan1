@@ -1,111 +1,95 @@
+:root {
+  --color-dark: #0d0a0b;
+  --color-gray: #454955;
+  --color-light: #f3eff5;
+  --color-green: #72b01d;
+  --color-dark-green: #3f7d20;
+}
+
 body {
-  font-family: Roboto;
-  background-color: #efffc8;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  min-height: 100vh; /* Chiều cao tối thiểu là 100% viewport */
+  display: flex;
+  flex-direction: column;
+  margin: 0; /* Reset margin mặc định */
+}
+
+h1 {
+  color: var(--color-dark);
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.container {
+  flex: 1; /* Phần thân sẽ đẩy giãn để đẩy footer xuống dưới */
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-footer {
-  font-family: Roboto;
-  margin-top: 50px;
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid #0d0a0b;
-}
-
-a {
-  text-decoration: none;
-}
-
-h1 {
-  color: #0d0a0b;
-  text-align: center;
-  font-size: 40px;
-}
-
-.container {
-  padding: 20px;
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Điều chỉnh chiều cao để đưa cards vào giữa theo chiều dọc */
 }
 
 .option-card {
-  background-color: #f3eff5;
-  padding: 30px;
-  border-radius: 30px;
+  background-color: var(--color-light);
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 600px; /* hoặc kích thước phù hợp */
+  margin: 0 auto; /* Căn giữa card trong cột */
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .option-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 6px rgba(0, 0, 0, 0.2);
 }
 
 .option-card i {
-  font-size: 3em;
-  color: #72b01d;
-  margin-bottom: 20px;
+  font-size: 48px;
+  color: var(--color-green);
 }
 
 .option-card h3 {
-  color: #0d0a0b;
-  margin-bottom: 15px;
+  color: var(--color-dark);
+  margin-top: 15px;
 }
 
 .option-card p {
-  color: #454955;
-  margin-bottom: 20px;
+  color: var(--color-gray);
 }
 
-.option-card .luaChon {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #3f7d20;
-  color: #f3eff5;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s ease;
+.option-card .btn-primary {
+  background-color: var(--color-dark-green);
+  border-color: var(--color-dark-green);
 }
 
-.option-card .luaChon:hover {
-  background-color: #72b01d;
+.option-card .btn-primary:hover {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
 }
 
-@keyframes fadeIn {
-  from {
-    transform: translateY(20px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .options {
-    grid-template-columns: 1fr;
-  }
-  h1 {
-    font-size: 32px;
-  }
-  .option-card {
-    padding: 20px;
-  }
+footer {
+  background-color: var(--color-dark);
+  font-weight: 550;
+  color: var(--color-light);
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
 }
 
 .social-links a {
-  color: #0d0a0b;
-  margin: 0 10px;
-  font-size: 1.5em;
-  transition: color 0.3s ease;
+  color: var(--color-light);
+  font-size: 30px;
 }
 
 .social-links a:hover {
-  color: #454955;
+  color: var(--color-green);
 }
