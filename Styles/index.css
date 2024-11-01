@@ -1,29 +1,28 @@
 :root {
-  --color-dark: #0d0a0b;
-  --color-gray: #454955;
-  --color-light: #f3eff5;
-  --color-green: #72b01d;
-  --color-dark-green: #3f7d20;
+  --color-Black: #000000;
+  --color-Oxford-blue: #14213d;
+  --color-Orange: #fca311;
+  --color-Platinum: #e5e5e5;
+  --color-White: #ffffff;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  background-color: var(--color-light);
-  color: var(--color-dark);
-  min-height: 100vh; /* Chiều cao tối thiểu là 100% viewport */
+  font-family: "Fira Sans", sans-serif;
+  background-color: var(--color-Platinum);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin: 0; /* Reset margin mặc định */
+  margin: 0;
 }
 
 h1 {
-  color: var(--color-dark);
+  color: var(--color-Oxford-blue);
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 40px;
 }
 
 .container {
-  flex: 1; /* Phần thân sẽ đẩy giãn để đẩy footer xuống dưới */
+  flex: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -33,63 +32,73 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh; /* Điều chỉnh chiều cao để đưa cards vào giữa theo chiều dọc */
+  min-height: 600px;
 }
 
 .option-card {
-  background-color: var(--color-light);
+  background-color: var(--color-Orange);
+  color: var(--color-Black);
   border-radius: 15px;
+  border-style: solid;
   padding: 20px;
-  max-width: 600px; /* hoặc kích thước phù hợp */
-  margin: 0 auto; /* Căn giữa card trong cột */
+  max-width: 600px;
+  margin: 0 auto;
   text-align: center;
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 }
 
 .option-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 6px rgba(0, 0, 0, 0.4);
 }
 
 .option-card i {
   font-size: 48px;
-  color: var(--color-green);
+  color: var(--color-Black);
 }
 
 .option-card h3 {
-  color: var(--color-dark);
+  color: var(--color-Black);
   margin-top: 15px;
+  font-weight: 700;
 }
 
 .option-card p {
-  color: var(--color-gray);
+  color: var(--color-Black);
 }
 
 .option-card .btn-primary {
-  background-color: var(--color-dark-green);
-  border-color: var(--color-dark-green);
+  background-color: var(--color-Oxford-blue);
+  border-color: var(--color-Black);
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  font-weight: 450;
 }
 
 .option-card .btn-primary:hover {
-  background-color: var(--color-green);
-  border-color: var(--color-green);
+  background-color: var(--color-Black);
+  border-color: var(--color-Oxford-blue);
+}
+
+.option-card .btn-primary:active {
+  transform: scale(1.1);
 }
 
 footer {
-  background-color: var(--color-dark);
+  background-color: var(--color-Oxford-blue);
   font-weight: 550;
-  color: var(--color-light);
+  color: var(--color-Platinum);
   padding: 10px 0;
   width: 100%;
   text-align: center;
 }
 
 .social-links a {
-  color: var(--color-light);
+  color: var(--color-White);
   font-size: 30px;
 }
 
 .social-links a:hover {
-  color: var(--color-green);
+  color: var(--color-Orange);
 }
