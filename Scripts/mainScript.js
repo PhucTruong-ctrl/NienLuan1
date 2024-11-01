@@ -199,27 +199,39 @@ function demBacDinh(dinh = null) {
      - Trả về true nếu có thể đi đến tất cả các đỉnh 
      - Trả về false nếu không thể đi đến một số đỉnh */
 function kiemTraLienThong() {
-  const visited = [];
+  const visited = new Set();
+  const stack = [];
 
-  function dfs(dinh) {
-    if (!visited.includes(dinh)) {
-      visited.push(dinh);
+  // Bắt đầu từ đỉnh đầu tiên
+  stack.push(cacDinh[0]);
 
-      cacCanh.forEach(([dinhA, dinhB]) => {
-        if (dinhA === dinh && !visited.includes(dinhB)) {
-          dfs(dinhB);
+  while (stack.length > 0) {
+    const dinhHienTai = stack.pop();
+
+    if (!visited.has(dinhHienTai)) {
+      console.log(`Đang xét đỉnh: ${dinhHienTai}`);
+      visited.add(dinhHienTai);
+
+      // Tìm các đỉnh kề chưa được thăm và thêm vào stack
+      for (const [dinhA, dinhB] of cacCanh) {
+        if (dinhA === dinhHienTai && !visited.has(dinhB)) {
+          console.log(`Thêm ${dinhB} vào stack để xét sau`);
+          stack.push(dinhB);
+        } else if (dinhB === dinhHienTai && !visited.has(dinhA)) {
+          console.log(`Thêm ${dinhA} vào stack để xét sau`);
+          stack.push(dinhA);
         }
-
-        if (dinhB === dinh && !visited.includes(dinhA)) {
-          dfs(dinhA);
-        }
-      });
+      }
+    } else {
+      console.log(`Đỉnh ${dinhHienTai} đã được thăm, quay lui`);
     }
+
+    console.log(`Stack hiện tại: ${stack.join(", ")}`);
+    console.log(`Các đỉnh đã thăm: ${[...visited].join(", ")}`);
+    console.log("---");
   }
 
-  dfs(cacDinh[0]);
-
-  return visited.length === cacDinh.length;
+  return visited.size === cacDinh.length;
 }
 
 /* Hàm này kiểm tra và kết luận về chu trình Euler của đồ thị.
