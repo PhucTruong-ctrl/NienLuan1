@@ -39,7 +39,6 @@ function veDoThi() {
    - Mỗi ô input cho phép nhập đỉnh kết nối
    - ID của mỗi input là dạng input-A-0, input-B-0, ... */
 function hienThiDinh() {
-  soCanh = cacDinh.length;
   cacDinh.forEach((dinh) => {
     const label = $("<label></label>").text(`${dinh}: `);
     const input = $("<input>")
@@ -64,9 +63,9 @@ function layVaThemCanh() {
   for (let i = 0; i < inputCount; i++) {
     for (let j = 0; j < cacDinh.length; j++) {
       const dinh = cacDinh[j];
-      const ketNoi = $(`#input-${dinh}-${i}`).val();
-      if (ketNoi && cacDinh.includes(ketNoi)) {
-        themCanh(dinh, ketNoi);
+      const dinhInput = $(`#input-${dinh}-${i}`).val();
+      if (dinhInput && cacDinh.includes(dinhInput)) {
+        themCanh(dinh, dinhInput);
       }
     }
   }
