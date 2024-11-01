@@ -199,25 +199,27 @@ function demBacDinh(dinh = null) {
      - Trả về true nếu có thể đi đến tất cả các đỉnh 
      - Trả về false nếu không thể đi đến một số đỉnh */
 function kiemTraLienThong() {
-  const visited = new Set();
+  const visited = [];
 
   function dfs(dinh) {
-    visited.add(dinh);
+    if (!visited.includes(dinh)) {
+      visited.push(dinh);
 
-    cacCanh.forEach(([dinhA, dinhB]) => {
-      if (dinhA === dinh && !visited.has(dinhB)) {
-        dfs(dinhB);
-      }
+      cacCanh.forEach(([dinhA, dinhB]) => {
+        if (dinhA === dinh && !visited.includes(dinhB)) {
+          dfs(dinhB);
+        }
 
-      if (dinhB === dinh && !visited.has(dinhA)) {
-        dfs(dinhA);
-      }
-    });
+        if (dinhB === dinh && !visited.includes(dinhA)) {
+          dfs(dinhA);
+        }
+      });
+    }
   }
 
   dfs(cacDinh[0]);
 
-  return visited.size === cacDinh.length;
+  return visited.length === cacDinh.length;
 }
 
 /* Hàm này kiểm tra và kết luận về chu trình Euler của đồ thị.
