@@ -78,7 +78,7 @@ h1 {
 
 .option-card .btn-primary:hover {
   background-color: var(--color-Black);
-  border-color: var(--color-Oxford-blue);
+  border-color: var(--color-Black);
 }
 
 .option-card .btn-primary:active {
