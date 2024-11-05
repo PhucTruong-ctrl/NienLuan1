@@ -1,49 +1,23 @@
+:root {
+  --color-Black: #000000;
+  --color-Oxford-blue: #14213d;
+  --color-Orange: #fca311;
+  --color-Platinum: #e5e5e5;
+  --color-White: #ffffff;
+}
+
 body {
   font-family: "Fira Sans", sans-serif;
-  text-align: center;
-}
-
-#ketLuan {
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-#canvasContainer {
+  background-color: var(--color-Platinum);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  place-items: center;
+  margin: 0;
 }
 
-#maTran table {
-  border-collapse: collapse;
-}
-
-#maTran th,
-#maTran td {
-  border: 1px solid #000000;
-  padding: 11.5px;
+h1 {
+  color: var(--color-Oxford-blue);
   text-align: center;
-  margin-left: 20px;
+  font-size: 40px;
 }
 
-#maTran th {
-  background-color: #f0f0f0;
-}
-
-#maTraKe {
-  margin-left: 20px;
-}
-
-.ketQuaEuler {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#trangChu {
-  position: fixed;
-  left: 1%;
-  top: 1%;
-}
