@@ -10,6 +10,7 @@ function veDoThi() {
   if (soDinh <= 12 && soDinh >= 2) {
     // Đảm bảo đỉnh vẽ ra chuẩn
     $("#button-xoa").show();
+    $("#ketLuan").show();
     taoCacDinh();
     themCacCanh(); // Thêm các cạnh ngẫu nhiên vào đồ thị
     veDoThiCanvas(); // Vẽ đồ thị lên canvas
