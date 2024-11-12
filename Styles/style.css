@@ -10,8 +10,6 @@ body {
   font-family: "Fira Sans", sans-serif;
   background-color: var(--color-Platinum);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   margin: 0;
 }
 
@@ -21,3 +19,76 @@ h1 {
   font-size: 40px;
 }
 
+
+#trangChu {
+  background-color: var(--color-Orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+}
+
+#trangChu i {
+  color: var(--color-Oxford-blue);
+}
+
+#button-tao,
+#button-xoa {
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+#button-tao {
+  background-color: var(--color-Orange);
+}
+
+#button-xoa {
+  background-color: var(--color-Oxford-blue);
+  color: var(--color-White);
+}
+
+#button-tao:hover,
+#button-xoa:hover,
+#trangChu:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+#button-tao:active,
+#button-xoa:active,
+#trangChu:active {
+  transform: scale(1.4);
+}
+
+#ketLuan {
+  background-color: var(--color-Orange);
+  color: var(--color-Black);
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+#maTran table {
+  border-collapse: separate;
+}
+
+#maTran th {
+  font-weight: 700;
+  color: var(--color-Black);
+  background-color: var(--color-Orange);
+}
+
+#maTran th,
+td {
+  border: 2px solid black;
+  padding: 12px;
+  text-align: center;
+}
