@@ -47,7 +47,7 @@ function hienThiDinh() {
       .attr("id", `input-${dinh}-${inputCount}`)
       .attr("class", "form-control")
       .attr("placeholder", "Nhập đỉnh kết nối");
-    $("#canhContainer").append(label).append(input).append("<br />");
+    $("#canhContainer").append(label).append(input);
   });
   inputCount++;
 }
