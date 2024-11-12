@@ -41,7 +41,8 @@ h1 {
   border-radius: 15px;
   border-style: solid;
   padding: 20px;
-  max-width: 600px;
+  min-width: 300px;
+  min-height: 230px;
   margin: 0 auto;
   text-align: center;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.4);
@@ -89,7 +90,7 @@ footer {
   background-color: var(--color-Oxford-blue);
   font-weight: 550;
   color: var(--color-Platinum);
-  padding: 10px 0;
+  padding: 10px;
   width: 100%;
   text-align: center;
 }
@@ -97,8 +98,13 @@ footer {
 .social-links a {
   color: var(--color-White);
   font-size: 30px;
+  transition: all 0.3s ease;
 }
 
 .social-links a:hover {
   color: var(--color-Orange);
+}
+
+.social-links a:active {
+  transform: scale(1.3);
 }
