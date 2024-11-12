@@ -37,7 +37,8 @@ h1 {
 #button-tao,
 #button-xoa,
 #button-ve,
-#button-themCanh {
+#button-themCanh,
+#button-reset {
   border-radius: 5px;
   border: none;
   font-size: 20px;
@@ -52,7 +53,8 @@ h1 {
 }
 
 #button-xoa,
-#button-ve {
+#button-ve,
+#button-reset {
   background-color: var(--color-Oxford-blue);
   color: var(--color-White);
 }
@@ -98,4 +100,33 @@ td {
   border: 2px solid black;
   padding: 12px;
   text-align: center;
+}
+
+#button-chonFile {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  width: 60px;
+  height: 40px;
+  border-bottom: var(--color-White) solid 0px;
+  transition: all 0.2s ease;
+}
+
+#button-chonFile:hover {
+  cursor: pointer;
+  color: var(--color-Orange);
+  border-bottom: var(--color-Oxford-blue) solid 2px;
+  transform: translateY(-5px);
+}
+
+#button-chonFile:active {
+  transform: translateY(-10px)
+}
+
+#file-input {
+  text-align: center;
+}
+
+input[type="file"] {
+  display: none;
 }
