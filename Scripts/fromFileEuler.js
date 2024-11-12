@@ -5,7 +5,6 @@ let daChonFile = false; // Đánh dấu trạng thái đã chọn file hay chưa
 /* Khởi tạo các sự kiện khi document ready */
 $(document).ready(function () {
   $("#file-input").on("change", xulyChonFile);
-  $("#button-ve").on("click", veDoThi);
 });
 
 /* Hàm này xử lý sự kiện khi người dùng chọn file.
@@ -14,10 +13,12 @@ $(document).ready(function () {
    - In thông báo đã chọn file thành công */
 function xulyChonFile(event) {
   const file = event.target.files[0];
+  const fileInput = document.getElementById("file-input");
+  const fileName = document.getElementById("fileSelected");
   console.log("Đã chọn file:", file.name);
   if (file) {
     daChonFile = true;
-    console.log("Đã chọn file thành công");
+    fileName.innerHTML = "Bạn đã chọn file: " + file.name;
   }
 }
 
