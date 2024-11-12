@@ -19,7 +19,6 @@ h1 {
   font-size: 40px;
 }
 
-
 #trangChu {
   background-color: var(--color-Orange);
   display: flex;
@@ -36,7 +35,9 @@ h1 {
 }
 
 #button-tao,
-#button-xoa {
+#button-xoa,
+#button-ve,
+#button-themCanh {
   border-radius: 5px;
   border: none;
   font-size: 20px;
@@ -45,17 +46,21 @@ h1 {
   transition: transform 0.2s ease;
 }
 
-#button-tao {
+#button-tao,
+#button-themCanh {
   background-color: var(--color-Orange);
 }
 
-#button-xoa {
+#button-xoa,
+#button-ve {
   background-color: var(--color-Oxford-blue);
   color: var(--color-White);
 }
 
 #button-tao:hover,
 #button-xoa:hover,
+#button-themCanh:hover,
+#button-ve:hover,
 #trangChu:hover {
   cursor: pointer;
   transform: scale(1.1);
@@ -63,6 +68,8 @@ h1 {
 
 #button-tao:active,
 #button-xoa:active,
+#button-themCanh:active,
+#button-ve:active,
 #trangChu:active {
   transform: scale(1.4);
 }
