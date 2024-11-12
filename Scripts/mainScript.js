@@ -8,6 +8,7 @@ $(document).ready(function () {
   $("#button-themCanh").hide();
   $("#button-ve").hide();
   $("#button-xoa").hide();
+  $("#ketLuan").hide();
 });
 
 /* Hàm này khởi tạo một đồ thị mới bằng cách reset các mảng và lấy số đỉnh từ input.
@@ -72,13 +73,12 @@ function veDoThiCanvas() {
   canvas.css({
     width: `${chieuDai}px`,
     height: `${chieuNgang}px`,
-    border: "1px solid black",
   });
   $("#canvasContainer").append(canvas);
   new p5(function (p) {
     p.setup = function () {
       p.createCanvas(chieuDai, chieuNgang).parent("canvas");
-      p.background(255);
+      p.background(229, 229, 229);
       const viTri = tinhToaDoDinh();
       veCacCanh(p, viTri);
       veCacDinh(p, viTri);
@@ -116,7 +116,7 @@ function tinhToaDoDinh() {
    - Vẽ đường thẳng từ A đến B với màu đen */
 function veCacCanh(p, viTri) {
   p.stroke(0);
-  p.strokeWeight(2);
+  p.strokeWeight(3);
 
   cacCanh.forEach(function (canh) {
     const [dinhHienTai, dinhTiepTheo] = canh;
@@ -141,15 +141,16 @@ function veCacDinh(p, viTri) {
     const bac = bacDinh[dinh];
 
     if (bac % 2 !== 0) {
-      p.fill(255, 0, 0);
+      p.fill(252, 163, 17);
     } else {
       p.fill(0);
     }
     p.ellipse(x, y, 20, 20);
 
+    p.textFont("Fira Sans");
     p.textAlign("CENTER");
     p.textSize(16);
-    p.text(dinh, x - 7, y - 20);
+    p.text(dinh, x - 13, y - 16);
   }
 }
 /* Hàm này kiểm tra xem hai đỉnh có cạnh nối với nhau không.
@@ -311,11 +312,10 @@ function hienThiMaTran() {
   const maTran = taoMaTran();
   const table = document.getElementById("maTran");
   table.innerHTML = "";
-
   // Tạo hàng tiêu đề
   const tenDinh = document.createElement("tr");
   tenDinh.innerHTML =
-    "<th></th>" +
+    "<th>Đỉnh</th>" +
     cacDinh
       .map(function (dinh) {
         return `<th>${dinh}</th>`;
