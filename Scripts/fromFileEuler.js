@@ -5,6 +5,7 @@ let daChonFile = false; // Đánh dấu trạng thái đã chọn file hay chưa
 /* Khởi tạo các sự kiện khi document ready */
 $(document).ready(function () {
   $("#file-input").on("change", xulyChonFile);
+  $("#button-tao").hide();
 });
 
 /* Hàm này xử lý sự kiện khi người dùng chọn file.
@@ -18,6 +19,7 @@ function xulyChonFile(event) {
   console.log("Đã chọn file:", file.name);
   if (file) {
     daChonFile = true;
+    $("#button-tao").show();
     fileName.innerHTML = "Bạn đã chọn file: " + file.name;
   }
 }
@@ -112,8 +114,6 @@ async function hienThiKetQua() {
   }
 
   taoDoThiTuDuLieu(cacDong);
-
-  $("#button-xoa").show();
   veDoThiCanvas();
   kiemTraEuler();
   hienThiMaTran();

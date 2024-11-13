@@ -12,7 +12,6 @@ function taoDoThi() {
   if (soDinh <= 12 && soDinh >= 2) {
     taoCacDinh();
     hienThiDinh();
-    $("#button-xoa").show();
     $("#button-them").show();
     $("#button-themCanh").show();
     $("#button-ve").show();

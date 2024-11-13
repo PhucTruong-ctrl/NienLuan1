@@ -7,7 +7,6 @@ $(document).ready(function () {
   $("#button-them").hide();
   $("#button-themCanh").hide();
   $("#button-ve").hide();
-  $("#button-xoa").hide();
   $("#ketLuan").hide();
 });
 
