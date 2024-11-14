@@ -48,9 +48,16 @@
     ></script>
   </head>
   <body>
-    <div title="Trang chủ" class="align-self-baseline m-2" id="trangChu">
-      <a href="../index.html"> <i class="fa-solid fa-house"></i></a>
-    </div>
+    <a
+      data-bs-toggle="tooltip"
+      data-bs-placement="right"
+      data-bs-title="Trang chủ"
+      class="align-self-baseline m-2"
+      id="trangChu"
+      href="../index.html"
+    >
+      <i class="fa-solid fa-house"></i
+    ></a>
     <div class="container">
       <h1 class="text-center">Vẽ Chu trình Euler Ngẫu nhiên</h1>
 
@@ -75,7 +82,7 @@
           <button
             data-bs-toggle="tooltip"
             data-bs-placement="top"
-            data-bs-title="Tạo"
+            data-bs-title="Vẽ"
             id="button-tao"
             onclick="veDoThi()"
           >

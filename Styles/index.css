@@ -41,8 +41,8 @@ h1 {
   border-radius: 15px;
   border-style: solid;
   padding: 20px;
-  min-width: 300px;
-  min-height: 230px;
+  min-width: 310px;
+  min-height: 240px;
   margin: 0 auto;
   text-align: center;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.4);
@@ -50,7 +50,7 @@ h1 {
 }
 
 .option-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-15px);
   box-shadow: 0 12px 6px rgba(0, 0, 0, 0.4);
 }
 
@@ -72,14 +72,17 @@ h1 {
 .option-card .btn-primary {
   background-color: var(--color-Oxford-blue);
   border-color: var(--color-Black);
+  color: var(--color-Platinum);
   transition: all 0.3s ease;
   border-radius: 12px;
   font-weight: 450;
 }
 
 .option-card .btn-primary:hover {
-  background-color: var(--color-Black);
-  border-color: var(--color-Black);
+  background-color: var(--color-Platinum);
+  border-color: var(--color-Oxford-blue);
+  color: var(--color-Oxford-blue);
+  font-weight: 700;
 }
 
 .option-card .btn-primary:active {
