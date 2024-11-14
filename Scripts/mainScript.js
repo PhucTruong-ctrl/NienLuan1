@@ -48,9 +48,9 @@ function taoCacDinh() {
    - Kiểm tra xem cạnh (A,B) đã tồn tại chưa
    - Nếu chưa, thêm ["A","B"] vào mảng cacCanh */
 function themCanh(dinhA, dinhB) {
-  if (!coCanh(dinhA, dinhB)) {
-    cacCanh.push([dinhA, dinhB]);
-  }
+  // if (!coCanh(dinhA, dinhB)) {
+  cacCanh.push([dinhA, dinhB]);
+  // }
 }
 
 /* Hàm này vẽ đồ thị lên canvas với kích thước tự động điều chỉnh.
@@ -115,14 +115,28 @@ function tinhToaDoDinh() {
    - Vẽ đường thẳng từ A đến B với màu đen */
 function veCacCanh(p, viTri) {
   p.stroke(0);
-  p.strokeWeight(3);
+  p.strokeWeight(2);
+  p.noFill();
 
   cacCanh.forEach(function (canh) {
     const [dinhHienTai, dinhTiepTheo] = canh;
     const [x1, y1] = viTri[dinhHienTai];
     const [x2, y2] = viTri[dinhTiepTheo];
 
-    p.line(x1, y1, x2, y2);
+    if (coCanh(dinhHienTai, dinhTiepTheo)) {
+      const xGiua = (x1 + x2) / 2;
+      const yGiua = (y1 + y2) / 2;
+      const offset = 20;
+      const controlX = xGiua + offset * Math.sign(y2 - y1);
+      const controlY = yGiua - offset * Math.sign(x2 - x1);
+
+      p.beginShape();
+      p.vertex(x1, y1);
+      p.quadraticVertex(controlX, controlY, x2, y2);
+      p.endShape();
+    } else {
+      p.line(x1, y1, x2, y2);
+    }
   });
 }
 
@@ -140,7 +154,7 @@ function veCacDinh(p, viTri) {
     const bac = bacDinh[dinh];
 
     if (bac % 2 !== 0) {
-      p.fill(252, 163, 17);
+      p.fill("red");
     } else {
       p.fill(0);
     }
@@ -158,17 +172,19 @@ function veCacDinh(p, viTri) {
    - Kiểm tra cả (A,B) và (B,A)
    - Trả về true nếu tồn tại cạnh, false nếu không */
 function coCanh(dinhHienTai, dinhTiepTheo) {
+  let demCanh = 0;
   for (let i = 0; i < cacCanh.length; i++) {
     const canh = cacCanh[i];
-
     if (
-      (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) ||
-      (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai)
+      (canh[0] === dinhHienTai && canh[1] === dinhTiepTheo) ||
+      (canh[0] === dinhTiepTheo && canh[1] === dinhHienTai)
     ) {
-      return true;
+      demCanh++;
+      if (demCanh > 1) {
+        return true;
+      }
     }
   }
-
   return false;
 }
 
@@ -209,26 +225,26 @@ function kiemTraLienThong() {
     const dinhHienTai = stack.pop();
 
     if (!visited.has(dinhHienTai)) {
-      console.log(`Đang xét đỉnh: ${dinhHienTai}`);
+      // console.log(`Đang xét đỉnh: ${dinhHienTai}`);
       visited.add(dinhHienTai);
 
       // Tìm các đỉnh kề chưa được thăm và thêm vào stack
       for (const [dinhA, dinhB] of cacCanh) {
         if (dinhA === dinhHienTai && !visited.has(dinhB)) {
-          console.log(`Thêm ${dinhB} vào stack để xét sau`);
+          // console.log(`Thêm ${dinhB} vào stack để xét sau`);
           stack.push(dinhB);
         } else if (dinhB === dinhHienTai && !visited.has(dinhA)) {
-          console.log(`Thêm ${dinhA} vào stack để xét sau`);
+          // console.log(`Thêm ${dinhA} vào stack để xét sau`);
           stack.push(dinhA);
         }
       }
-    } else {
-      console.log(`Đỉnh ${dinhHienTai} đã được thăm, quay lui`);
+      // } else {
+      //   console.log(`Đỉnh ${dinhHienTai} đã được thăm, quay lui`);
     }
 
-    console.log(`Stack hiện tại: ${stack.join(", ")}`);
-    console.log(`Các đỉnh đã thăm: ${[...visited].join(", ")}`);
-    console.log("---");
+    // console.log(`Stack hiện tại: ${stack.join(", ")}`);
+    // console.log(`Các đỉnh đã thăm: ${[...visited].join(", ")}`);
+    // console.log("---");
   }
 
   return visited.size === cacDinh.length;

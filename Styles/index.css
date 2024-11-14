@@ -73,7 +73,7 @@ h1 {
   background-color: var(--color-Oxford-blue);
   border-color: var(--color-Black);
   color: var(--color-Platinum);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   border-radius: 12px;
   font-weight: 450;
 }
