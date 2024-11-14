@@ -120,7 +120,7 @@ td {
 }
 
 #button-chonFile:active {
-  transform: translateY(-10px)
+  transform: translateY(-10px);
 }
 
 #file-input {
@@ -129,4 +129,17 @@ td {
 
 input[type="file"] {
   display: none;
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.fa-arrows-rotate {
+  -webkit-animation: rotating 2s linear infinite;
 }
