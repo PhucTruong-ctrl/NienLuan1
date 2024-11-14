@@ -1,3 +1,9 @@
+document.addEventListener("keydown", function (event) {
+  if (event.keyCode == 32) {
+    veDoThi();
+  }
+});
+
 /* Hàm này vẽ đồ thị bằng cách khởi tạo các đỉnh và thêm các cạnh ngẫu nhiên.
    VD: Khi người dùng nhấn nút Vẽ:
    - Khởi tạo đồ thị mới
