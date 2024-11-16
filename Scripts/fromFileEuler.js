@@ -8,10 +8,7 @@ $(document).ready(function () {
   $("#button-tao").hide();
 });
 
-/* Hàm này xử lý sự kiện khi người dùng chọn file.
-   VD: Khi người dùng chọn file "input.txt":
-   - Đánh dấu daChonFile = true
-   - In thông báo đã chọn file thành công */
+/* Hàm này xử lý sự kiện khi người dùng chọn file. */
 function xulyChonFile(event) {
   const file = event.target.files[0];
   const fileInput = document.getElementById("file-input");
@@ -24,14 +21,7 @@ function xulyChonFile(event) {
   }
 }
 
-/* Hàm này đọc và xử lý nội dung file.
-   VD: Với file "input.txt" có nội dung:
-   4
-   A B
-   B C
-   C D
-   D A
-   Hàm sẽ trả về mảng: ["4", "A B", "B C", "C D", "D A"] */
+/* Hàm này đọc và xử lý nội dung file. */
 async function docVaXuLyFile(file) {
   console.log("Đang đọc và xử lý file:", file.name);
   const noiDung = await file.text();
@@ -46,42 +36,47 @@ async function docVaXuLyFile(file) {
   return cacDong;
 }
 
-/* Hàm này tạo đồ thị từ dữ liệu đã xử lý.
-   VD: Với mảng ["4", "A B", "B C", "C D", "D A"]:
-   - Tạo 4 đỉnh A, B, C, D
-   - Thêm các cạnh AB, BC, CD, DA */
+/* Hàm này tạo đồ thị từ dữ liệu đã xử lý. */
+/* Hàm này tạo đồ thị từ dữ liệu đã xử lý. */
 function taoDoThiTuDuLieu(cacDong) {
   console.log("Đang tạo đồ thị từ dữ liệu:", cacDong);
   if (cacDong.length < 2) {
     console.error("File không đủ dữ liệu");
+    return;
   }
 
   const soDinhDoc = parseInt(cacDong[0]);
   console.log("Số đỉnh đọc được:", soDinhDoc);
   if (isNaN(soDinhDoc) || soDinhDoc < 2 || soDinhDoc > 12) {
     console.error("Số đỉnh không hợp lệ (phải từ 2-12)");
+    return;
   }
 
   khoiTaoDoThi();
   soDinh = soDinhDoc;
   taoCacDinh();
 
-  for (let i = 1; i < cacDong.length; i++) {
-    const canh = cacDong[i].split(/\s+/);
-    console.log("Đang thêm cạnh:", canh);
-    if (canh.length === 2) {
-      const [dinhA, dinhB] = canh;
-      if (cacDinh.includes(dinhA) && cacDinh.includes(dinhB)) {
-        themCanh(dinhA, dinhB);
+  // Xử lý ma trận kề
+  for (let i = 1; i <= soDinh; i++) {
+    // Kiểm tra xem cacDong[i] có tồn tại không
+    if (i < cacDong.length) {
+      const hang = cacDong[i].split(/\s+/).map(Number);
+      for (let j = 0; j < hang.length; j++) {
+        if (hang[j] === 1) {
+          const dinhA = cacDinh[i - 1];
+          const dinhB = cacDinh[j];
+          themCanh(dinhA, dinhB);
+        }
       }
+    } else {
+      console.error(`Dòng ${i} không tồn tại trong dữ liệu`);
     }
   }
+
   console.log("Các cạnh gồm: ", cacCanh);
 }
 
-/* Hàm chung để vẽ đồ thị, chỉ bao gồm các hàm con.
-   VD: Khi người dùng nhấn nút Vẽ:
-   - Gọi hàm hiển thị kết quả */
+/* Hàm chung để vẽ đồ thị, chỉ bao gồm các hàm con. */
 async function veDoThi() {
   console.log("Bắt đầu vẽ đồ thị");
   try {
@@ -92,13 +87,7 @@ async function veDoThi() {
   }
 }
 
-/* Hàm xử lý chính để hiển thị kết quả từ file.
-     VD: Khi được gọi từ veDoThi:
-     - Đọc và xử lý file
-     - Tạo đồ thị
-     - Vẽ đồ thị lên canvas
-     - Hiển thị ma trận kề
-     - Kiểm tra và hiển thị kết luận về chu trình Euler */
+/* Hàm xử lý chính để hiển thị kết quả từ file. */
 async function hienThiKetQua() {
   console.log("Đang xử lý và hiển thị kết quả");
   const fileInput = document.getElementById("file-input");
