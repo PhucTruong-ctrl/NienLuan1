@@ -47,10 +47,26 @@ function taoCacDinh() {
    VD: Thêm cạnh giữa A và B:
    - Kiểm tra xem cạnh (A,B) đã tồn tại chưa
    - Nếu chưa, thêm ["A","B"] vào mảng cacCanh */
-function themCanh(dinhA, dinhB) {
-  // if (!coCanh(dinhA, dinhB)) {
-  cacCanh.push([dinhA, dinhB]);
-  // }
+function themCanh(dinhHienTai, dinhTiepTheo) {
+  let demCanh = 0;
+
+  // Đếm số cạnh hiện có giữa hai đỉnh
+  for (let i = 0; i < cacCanh.length; i++) {
+    const canh = cacCanh[i];
+    if (
+      (canh[0] === dinhHienTai && canh[1] === dinhTiepTheo) ||
+      (canh[0] === dinhTiepTheo && canh[1] === dinhHienTai)
+    ) {
+      demCanh++;
+    }
+  }
+
+  // Nếu số cạnh < 2, thêm cạnh mới
+  if (demCanh < 2) {
+    cacCanh.push([dinhHienTai, dinhTiepTheo]);
+  } else {
+    console.log(dinhHienTai, dinhTiepTheo, cacCanh);
+  }
 }
 
 /* Hàm này vẽ đồ thị lên canvas với kích thước tự động điều chỉnh.
@@ -123,7 +139,20 @@ function veCacCanh(p, viTri) {
     const [x1, y1] = viTri[dinhHienTai];
     const [x2, y2] = viTri[dinhTiepTheo];
 
-    if (coCanh(dinhHienTai, dinhTiepTheo)) {
+    // Đếm số cạnh giữa hai đỉnh
+    let demCanh = 0;
+    for (let i = 0; i < cacCanh.length; i++) {
+      const canhKiemTra = cacCanh[i];
+      if (
+        (canhKiemTra[0] === dinhHienTai && canhKiemTra[1] === dinhTiepTheo) ||
+        (canhKiemTra[0] === dinhTiepTheo && canhKiemTra[1] === dinhHienTai)
+      ) {
+        demCanh++;
+      }
+    }
+
+    // Nếu có nhiều hơn 1 cạnh, vẽ đường cong
+    if (demCanh > 1) {
       const xGiua = (x1 + x2) / 2;
       const yGiua = (y1 + y2) / 2;
       const offset = 20;
@@ -135,6 +164,7 @@ function veCacCanh(p, viTri) {
       p.quadraticVertex(controlX, controlY, x2, y2);
       p.endShape();
     } else {
+      // Nếu chỉ có 1 cạnh, vẽ đường thẳng
       p.line(x1, y1, x2, y2);
     }
   });
@@ -172,19 +202,19 @@ function veCacDinh(p, viTri) {
    - Kiểm tra cả (A,B) và (B,A)
    - Trả về true nếu tồn tại cạnh, false nếu không */
 function coCanh(dinhHienTai, dinhTiepTheo) {
-  let demCanh = 0;
   for (let i = 0; i < cacCanh.length; i++) {
     const canh = cacCanh[i];
+
     if (
-      (canh[0] === dinhHienTai && canh[1] === dinhTiepTheo) ||
-      (canh[0] === dinhTiepTheo && canh[1] === dinhHienTai)
+      (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) ||
+      (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai)
     ) {
-      demCanh++;
-      if (demCanh > 1) {
-        return true;
-      }
+      console.log(dinhHienTai, dinhTiepTheo + " 2 đỉnh này có cạnh với nhau");
+      return true;
     }
   }
+  console.log(dinhHienTai, dinhTiepTheo + " 2 đỉnh này không có cạnh với nhau");
+
   return false;
 }
 
