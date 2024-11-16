@@ -40,14 +40,18 @@ function veDoThi() {
    - Mỗi ô input cho phép nhập đỉnh kết nối
    - ID của mỗi input là dạng input-A-0, input-B-0, ... */
 function hienThiDinh() {
-  cacDinh.forEach((dinh) => {
-    const label = $("<label></label>").text(`${dinh}: `);
-    const input = $("<input>")
-      .attr("id", `input-${dinh}-${inputCount}`)
-      .attr("class", "form-control")
-      .attr("placeholder", "Nhập đỉnh kết nối. VD: " + dinh);
-    $("#canhContainer").append(label).append(input);
-  });
+  if (inputCount <= 1) {
+    cacDinh.forEach((dinh) => {
+      const label = $("<label></label>").text(`${dinh}: `);
+      const input = $("<input>")
+        .attr("id", `input-${dinh}-${inputCount}`)
+        .attr("class", "form-control")
+        .attr("placeholder", "Nhập đỉnh kết nối. VD: " + dinh);
+      $("#canhContainer").append(label).append(input);
+    });
+  } else {
+    alert("Không thể tạo thêm cạnh!");
+  }
   inputCount++;
 }
 
