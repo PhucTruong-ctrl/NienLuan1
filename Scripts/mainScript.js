@@ -49,23 +49,26 @@ function taoCacDinh() {
    - Nếu chưa, thêm ["A","B"] vào mảng cacCanh */
 function themCanh(dinhHienTai, dinhTiepTheo) {
   let demCanh = 0;
-
   // Đếm số cạnh hiện có giữa hai đỉnh
   for (let i = 0; i < cacCanh.length; i++) {
     const canh = cacCanh[i];
     if (
-      (canh[0] === dinhHienTai && canh[1] === dinhTiepTheo) ||
-      (canh[0] === dinhTiepTheo && canh[1] === dinhHienTai)
+      (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) ||
+      (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai)
     ) {
       demCanh++;
     }
   }
 
-  // Nếu số cạnh < 2, thêm cạnh mới
+  if (coCanhHienTai(dinhHienTai, dinhTiepTheo)) {
+    [dinhHienTai, dinhTiepTheo] = [dinhTiepTheo, dinhHienTai];
+    console.log("Có cạnh trùng giữa " + dinhHienTai + " và " + dinhTiepTheo);
+  } else if (coCanhTiepTheo(dinhTiepTheo, dinhHienTai)) {
+    [dinhHienTai, dinhTiepTheo] = [dinhTiepTheo, dinhHienTai];
+    console.log("Có cạnh trùng giữa " + dinhTiepTheo + " và " + dinhHienTai);
+  }
   if (demCanh < 2) {
     cacCanh.push([dinhHienTai, dinhTiepTheo]);
-  } else {
-    console.log(dinhHienTai, dinhTiepTheo, cacCanh);
   }
 }
 
@@ -133,7 +136,7 @@ function veCacCanh(p, viTri) {
   p.stroke(0);
   p.strokeWeight(2);
   p.noFill();
-
+  console.log(cacCanh);
   cacCanh.forEach(function (canh) {
     const [dinhHienTai, dinhTiepTheo] = canh;
     const [x1, y1] = viTri[dinhHienTai];
@@ -144,8 +147,8 @@ function veCacCanh(p, viTri) {
     for (let i = 0; i < cacCanh.length; i++) {
       const canhKiemTra = cacCanh[i];
       if (
-        (canhKiemTra[0] === dinhHienTai && canhKiemTra[1] === dinhTiepTheo) ||
-        (canhKiemTra[0] === dinhTiepTheo && canhKiemTra[1] === dinhHienTai)
+        (canhKiemTra[0] == dinhHienTai && canhKiemTra[1] == dinhTiepTheo) ||
+        (canhKiemTra[0] == dinhTiepTheo && canhKiemTra[1] == dinhHienTai)
       ) {
         demCanh++;
       }
@@ -209,12 +212,31 @@ function coCanh(dinhHienTai, dinhTiepTheo) {
       (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) ||
       (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai)
     ) {
-      console.log(dinhHienTai, dinhTiepTheo + " 2 đỉnh này có cạnh với nhau");
       return true;
     }
   }
-  console.log(dinhHienTai, dinhTiepTheo + " 2 đỉnh này không có cạnh với nhau");
+  return false;
+}
 
+function coCanhHienTai(dinhHienTai, dinhTiepTheo) {
+  for (let i = 0; i < cacCanh.length; i++) {
+    const canh = cacCanh[i];
+
+    if (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function coCanhTiepTheo(dinhHienTai, dinhTiepTheo) {
+  for (let i = 0; i < cacCanh.length; i++) {
+    const canh = cacCanh[i];
+
+    if (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai) {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -260,10 +282,10 @@ function kiemTraLienThong() {
 
       // Tìm các đỉnh kề chưa được thăm và thêm vào stack
       for (const [dinhA, dinhB] of cacCanh) {
-        if (dinhA === dinhHienTai && !visited.has(dinhB)) {
+        if (dinhA == dinhHienTai && !visited.has(dinhB)) {
           // console.log(`Thêm ${dinhB} vào stack để xét sau`);
           stack.push(dinhB);
-        } else if (dinhB === dinhHienTai && !visited.has(dinhA)) {
+        } else if (dinhB == dinhHienTai && !visited.has(dinhA)) {
           // console.log(`Thêm ${dinhA} vào stack để xét sau`);
           stack.push(dinhA);
         }
@@ -277,7 +299,7 @@ function kiemTraLienThong() {
     // console.log("---");
   }
 
-  return visited.size === cacDinh.length;
+  return visited.size == cacDinh.length;
 }
 
 /* Hàm này kiểm tra và kết luận về chu trình Euler của đồ thị.
@@ -302,10 +324,10 @@ function kiemTraEuler() {
   let ketLuan;
 
   if (kiemTraLienThong()) {
-    if (bacLe === 0) {
+    if (bacLe == 0) {
       ketLuan =
         "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn và đồ thị liên thông";
-    } else if (bacLe === 2) {
+    } else if (bacLe == 2) {
       ketLuan =
         "Là nửa chu trình Euler vì có đúng 2 đỉnh bậc lẻ và đồ thị liên thông";
     } else {
