@@ -8,9 +8,9 @@ let inputCount = 0; // Biến đếm số lần nhập input
    - Hiển thị form nhập liệu cho mỗi đỉnh
    - Hiển thị các nút Xóa, Thêm, Thêm cạnh, Vẽ */
 function taoDoThi() {
-  khoiTaoDoThi();
+  khoiTao();
   if (soDinh <= 12 && soDinh >= 2) {
-    taoCacDinh();
+    taoDinh();
     hienThiDinh();
     $("#button-them").show();
     $("#button-themCanh").show();
@@ -26,9 +26,9 @@ function taoDoThi() {
 function veDoThi() {
   if (soDinh <= 12 && soDinh >= 2) {
     layVaThemCanh();
-    veDoThiCanvas();
+    veCanvas();
     hienThiMaTran();
-    kiemTraEuler();
+    checkEuler();
     $("#button-xoa").show();
     $("#ketLuan").show();
   }

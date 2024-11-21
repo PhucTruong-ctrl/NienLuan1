@@ -2,7 +2,7 @@ let cacCanh = []; // Mảng chứa cạnh
 let cacDinh = []; // Mảng chứa đỉnh
 let soDinh = 0; // Số đỉnh
 
-// Khởi tạo ban đầu: Ẩn các nút không cần thiết khi mới load trang
+// Ẩn các nút không cần thiết khi mới load trang
 $(document).ready(function () {
   $("#button-them").hide();
   $("#button-themCanh").hide();
@@ -10,14 +10,8 @@ $(document).ready(function () {
   $("#ketLuan").hide();
 });
 
-/* Hàm này khởi tạo một đồ thị mới bằng cách reset các mảng và lấy số đỉnh từ input.
-   VD: Người dùng nhập số đỉnh = 4
-   - Reset mảng cacCanh = []
-   - Reset mảng cacDinh = []
-   - Lấy số đỉnh từ input: soDinh = 4
-   - Xóa các input cũ
-   - Xóa kết luận cũ */
-function khoiTaoDoThi() {
+// Khởi tạo đồ thị, Reset các mảng, lấy số đình từ input
+function khoiTao() {
   cacCanh = [];
   cacDinh = [];
   soDinh = $("#soDinh").val();
@@ -25,49 +19,52 @@ function khoiTaoDoThi() {
   $("#ketLuan").empty();
 }
 
-/* Hàm này xóa đồ thị hiện tại và reload lại trang.
-
-   VD: Người dùng nhấn nút Xóa
-   - Trang web sẽ được tải lại từ đầu
-   - Tất cả dữ liệu đồ thị hiện tại sẽ bị xóa */
+// Xoá đồ thị bằng cách refresh lại trang
 function xoaDoThi() {
   location.reload();
 }
 
-/* Hàm này tạo các đỉnh cho đồ thị dựa trên số đỉnh đã nhập.
-   VD: Với số đỉnh = 4:
-   - Tạo mảng cacDinh = ["A", "B", "C", "D"] */
-function taoCacDinh() {
+/* Hàm này sẽ tạo đỉnh bằng bảng chữ cái theo soDinh
+VD: soDinh = 4.
+i = 0, Thêm A vào mảng cacDinh['A']
+i = 1, Thêm B vào mảng cacDinh['A','B']
+i = 2, Thêm C vào mảng cacDinh['A','B','C']
+i = 3, Thêm D vào mảng cacDinh['A','B','C','D']
+*/
+function taoDinh() {
   for (let i = 0; i < soDinh; i++) {
     cacDinh.push(String.fromCharCode(65 + i));
+    // Hiển thị số thay vì chữ cái
+    // cacDinh.push(i + 1);
   }
 }
 
-/* Hàm này thêm một cạnh mới vào đồ thị nếu cạnh đó chưa tồn tại.
-   VD: Thêm cạnh giữa A và B:
-   - Kiểm tra xem cạnh (A,B) đã tồn tại chưa
-   - Nếu chưa, thêm ["A","B"] vào mảng cacCanh */
+/* Hàm này thêm cạnh vào mảng cacCanh, giới hạn cạnh của mỗi đỉnh tối đa là 2,
+ đảo ngược đỉnh lại nếu đỉnh hiện tại đã có cạnh với đỉnh tiếp theo.
+ VD: soDinh = 4, cacDinh = ['A','B','C','D'].
+ i = 0, cacCanh.length = 0, Đình hiện tại ko trùng, Thêm A và B vào mảng cacCanh[['A','B']]
+ i = 1, cacCanh.length = 1, Đỉnh hiện tại trùng, Thêm B và A vào mảng cacCanh[['A','B'],['B','A']]
+ i = 2, cacCanh.length = 2, Đỉnh hiện tại ko trùng, Thêm B và C vào mảng cacCanh[['A','B'],['B','A'],['B','C']]
+ i = 3, cacCanh.length = 3, Đînh hiện tại ko trùng, Thêm C và D vào mảng cacCanh[['A','B'],['B','A'],['B','C'],['C','D']]
+*/
 function themCanh(dinhHienTai, dinhTiepTheo) {
-  let demCanh = 0;
-  // Đếm số cạnh hiện có giữa hai đỉnh
+  let demCanhTrung = 0;
   for (let i = 0; i < cacCanh.length; i++) {
     const canh = cacCanh[i];
     if (
       (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) ||
       (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai)
     ) {
-      demCanh++;
+      demCanhTrung++;
     }
   }
 
   if (coCanhHienTai(dinhHienTai, dinhTiepTheo)) {
     [dinhHienTai, dinhTiepTheo] = [dinhTiepTheo, dinhHienTai];
     console.log("Có cạnh trùng giữa " + dinhHienTai + " và " + dinhTiepTheo);
-  } else if (coCanhTiepTheo(dinhTiepTheo, dinhHienTai)) {
-    [dinhHienTai, dinhTiepTheo] = [dinhTiepTheo, dinhHienTai];
-    console.log("Có cạnh trùng giữa " + dinhTiepTheo + " và " + dinhHienTai);
   }
-  if (demCanh < 2) {
+  if (demCanhTrung < 2) {
+    console.log("Đang thêm: " + dinhHienTai + " và " + dinhTiepTheo);
     cacCanh.push([dinhHienTai, dinhTiepTheo]);
   }
 }
@@ -77,12 +74,12 @@ function themCanh(dinhHienTai, dinhTiepTheo) {
    - Tính toán kích thước canvas dựa trên số đỉnh
    - Tạo canvas với kích thước phù hợp
    - Vẽ các đỉnh và cạnh lên canvas */
-function veDoThiCanvas() {
+function veCanvas() {
   $("#canvasContainer").empty();
 
   const kichThuocGoc = 100;
-  const hang = Math.ceil(Math.sqrt(soDinh));
-  const cot = Math.ceil(soDinh / hang);
+  const hang = Math.ceil(Math.sqrt(soDinh)); // Math.ceil làm tròn lên số nguyên lớn nhất
+  const cot = Math.ceil(soDinh / hang); // Math.ceil làm tròn lên số nguyên lớn nhất
   const chieuNgang = hang * kichThuocGoc;
   const chieuDai = cot * kichThuocGoc;
   const canvas = $("<div></div>");
@@ -97,9 +94,9 @@ function veDoThiCanvas() {
     p.setup = function () {
       p.createCanvas(chieuDai, chieuNgang).parent("canvas");
       p.background(229, 229, 229);
-      const viTri = tinhToaDoDinh();
-      veCacCanh(p, viTri);
-      veCacDinh(p, viTri);
+      const viTri = tinhToaDo();
+      veCanh(p, viTri);
+      veDinh(p, viTri);
     };
   });
 }
@@ -110,14 +107,15 @@ function veDoThiCanvas() {
    - Khoảng cách giữa các đỉnh = 100px
    - Trả về object chứa tọa độ:
      {A:[50,50], B:[150,50], C:[50,150], D:[150,150]} */
-function tinhToaDoDinh() {
+function tinhToaDo() {
   const viTri = {};
   const gridSize = 100;
-  const hang = Math.ceil(Math.sqrt(soDinh));
-  const cot = Math.ceil(soDinh / hang);
+  const hang = Math.ceil(Math.sqrt(soDinh)); // Math.ceil làm tròn lên số nguyên lớn nhất
+  const cot = Math.ceil(soDinh / hang); // Math.ceil làm tròn lên số nguyên lớn nhất
+  console.log(hang, cot);
 
   for (let i = 0; i < soDinh; i++) {
-    const Hang = Math.floor(i / cot);
+    const Hang = Math.floor(i / cot); // Math.floor làm tròn xuống số nguyên nhỏ nhất
     const Cot = i % cot;
     const x = 50 + Cot * gridSize;
     const y = 50 + Hang * gridSize;
@@ -127,60 +125,14 @@ function tinhToaDoDinh() {
   return viTri;
 }
 
-/* Hàm này vẽ các cạnh của đồ thị trên canvas.
-   VD: Với cạnh nối A và B:
-   - Lấy tọa độ của A: [50,50]
-   - Lấy tọa độ của B: [150,50]
-   - Vẽ đường thẳng từ A đến B với màu đen */
-function veCacCanh(p, viTri) {
-  p.stroke(0);
-  p.strokeWeight(2);
-  p.noFill();
-  console.log(cacCanh);
-  cacCanh.forEach(function (canh) {
-    const [dinhHienTai, dinhTiepTheo] = canh;
-    const [x1, y1] = viTri[dinhHienTai];
-    const [x2, y2] = viTri[dinhTiepTheo];
-
-    // Đếm số cạnh giữa hai đỉnh
-    let demCanh = 0;
-    for (let i = 0; i < cacCanh.length; i++) {
-      const canhKiemTra = cacCanh[i];
-      if (
-        (canhKiemTra[0] == dinhHienTai && canhKiemTra[1] == dinhTiepTheo) ||
-        (canhKiemTra[0] == dinhTiepTheo && canhKiemTra[1] == dinhHienTai)
-      ) {
-        demCanh++;
-      }
-    }
-
-    // Nếu có nhiều hơn 1 cạnh, vẽ đường cong
-    if (demCanh > 1) {
-      const xGiua = (x1 + x2) / 2;
-      const yGiua = (y1 + y2) / 2;
-      const offset = 20;
-      const controlX = xGiua + offset * Math.sign(y2 - y1);
-      const controlY = yGiua - offset * Math.sign(x2 - x1);
-
-      p.beginShape();
-      p.vertex(x1, y1);
-      p.quadraticVertex(controlX, controlY, x2, y2);
-      p.endShape();
-    } else {
-      // Nếu chỉ có 1 cạnh, vẽ đường thẳng
-      p.line(x1, y1, x2, y2);
-    }
-  });
-}
-
 /* Hàm này vẽ các đỉnh của đồ thị trên canvas.
    VD: Với 4 đỉnh A, B, C, D:
    - Vẽ hình tròn tại vị trí mỗi đỉnh
    - Đỉnh bậc lẻ: màu đỏ
    - Đỉnh bậc chẵn: màu đen
    - Hiển thị tên đỉnh phía trên hình tròn */
-function veCacDinh(p, viTri) {
-  const bacDinh = demBacDinh();
+function veDinh(p, viTri) {
+  const bacDinh = demBac();
   p.noStroke();
   for (const dinh in viTri) {
     const [x, y] = viTri[dinh];
@@ -199,6 +151,52 @@ function veCacDinh(p, viTri) {
     p.text(dinh, x - 13, y - 16);
   }
 }
+
+/* Hàm này vẽ các cạnh của đồ thị trên canvas.
+   VD: Với cạnh nối A và B:
+   - Lấy tọa độ của A: [50,50]
+   - Lấy tọa độ của B: [150,50]
+   - Vẽ đường thẳng từ A đến B với màu đen */
+function veCanh(p, viTri) {
+  p.stroke(0);
+  p.strokeWeight(2);
+  p.noFill();
+  cacCanh.forEach(function (canh) {
+    const [dinhHienTai, dinhTiepTheo] = canh;
+    const [x1, y1] = viTri[dinhHienTai];
+    const [x2, y2] = viTri[dinhTiepTheo];
+
+    let demCanhTrung = 0;
+    for (let i = 0; i < cacCanh.length; i++) {
+      const canh = cacCanh[i];
+      if (
+        (canh[0] == dinhHienTai && canh[1] == dinhTiepTheo) ||
+        (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai)
+      ) {
+        demCanhTrung++;
+      }
+    }
+
+    if (demCanhTrung > 1) {
+      const xGiua = (x1 + x2) / 2;
+      const yGiua = (y1 + y2) / 2;
+      const offset = 20;
+      const controlX = xGiua + offset * Math.sign(y2 - y1); // Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      const controlY = yGiua - offset * Math.sign(x2 - x1); // Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      console.log("Đỉnh là: " + dinhHienTai, x1, y1, dinhTiepTheo, x2, y2);
+      console.log("xGiua, yGiua: ", xGiua, yGiua);
+      console.log("controlX, controlY: ", controlX, controlY);
+
+      p.beginShape();
+      p.vertex(x1, y1);
+      p.quadraticVertex(controlX, controlY, x2, y2);
+      p.endShape();
+    } else {
+      p.line(x1, y1, x2, y2);
+    }
+  });
+}
+
 /* Hàm này kiểm tra xem hai đỉnh có cạnh nối với nhau không.
    VD: Kiểm tra cạnh giữa A và B:
    - Duyệt qua mảng cacCanh
@@ -229,22 +227,11 @@ function coCanhHienTai(dinhHienTai, dinhTiepTheo) {
   return false;
 }
 
-function coCanhTiepTheo(dinhHienTai, dinhTiepTheo) {
-  for (let i = 0; i < cacCanh.length; i++) {
-    const canh = cacCanh[i];
-
-    if (canh[0] == dinhTiepTheo && canh[1] == dinhHienTai) {
-      return true;
-    }
-  }
-  return false;
-}
-
 /* Hàm này đếm bậc của các đỉnh trong đồ thị.
      VD: Với đồ thị có các cạnh (A,B), (B,C):
      - Nếu không có tham số: trả về {A:1, B:2, C:1}  
      - Nếu có tham số (VD: B): trả về 2 */
-function demBacDinh(dinh = null) {
+function demBac(dinh = null) {
   const bacDinh = {};
 
   cacDinh.forEach((dinh) => {
@@ -266,8 +253,8 @@ function demBacDinh(dinh = null) {
      - Duyệt DFS qua các đỉnh kề 
      - Trả về true nếu có thể đi đến tất cả các đỉnh 
      - Trả về false nếu không thể đi đến một số đỉnh */
-function kiemTraLienThong() {
-  const visited = new Set();
+function checkLienThong() {
+  const visited = new Set(); // Set để đảm bảo mỗi phần tử là duy nhất
   const stack = [];
 
   // Bắt đầu từ đỉnh đầu tiên
@@ -293,12 +280,10 @@ function kiemTraLienThong() {
       // } else {
       //   console.log(`Đỉnh ${dinhHienTai} đã được thăm, quay lui`);
     }
-
     // console.log(`Stack hiện tại: ${stack.join(", ")}`);
     // console.log(`Các đỉnh đã thăm: ${[...visited].join(", ")}`);
     // console.log("---");
   }
-
   return visited.size == cacDinh.length;
 }
 
@@ -310,8 +295,8 @@ function kiemTraLienThong() {
        + Chu trình Euler: nếu liên thông và tất cả đỉnh bậc chẵn
        + Nửa chu trình Euler: nếu liên thông và có đúng 2 đỉnh bậc lẻ
        + Không là chu trình Euler: trong các trường hợp còn lại */
-function kiemTraEuler() {
-  const bacDinh = demBacDinh();
+function checkEuler() {
+  const bacDinh = demBac();
 
   let bacLe = 0;
 
@@ -323,7 +308,7 @@ function kiemTraEuler() {
 
   let ketLuan;
 
-  if (kiemTraLienThong()) {
+  if (checkLienThong()) {
     if (bacLe == 0) {
       ketLuan =
         "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn và đồ thị liên thông";

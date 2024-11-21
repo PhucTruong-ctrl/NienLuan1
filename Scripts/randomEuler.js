@@ -1,9 +1,3 @@
-document.addEventListener("keydown", function (event) {
-  if (event.keyCode === 32 && duocSpace) {
-    veDoThi();
-  }
-});
-
 /* Hàm này vẽ đồ thị bằng cách khởi tạo các đỉnh và thêm các cạnh ngẫu nhiên.
    VD: Khi người dùng nhấn nút Vẽ:
    - Khởi tạo đồ thị mới
@@ -12,14 +6,14 @@ document.addEventListener("keydown", function (event) {
    - Vẽ đồ thị lên canvas
    - Hiển thị ma trận kề và kiểm tra chu trình Euler */
 function veDoThi() {
-  khoiTaoDoThi();
+  khoiTao();
   if (soDinh <= 12 && soDinh >= 2) {
     // Đảm bảo đỉnh vẽ ra chuẩn
     $("#ketLuan").show();
-    taoCacDinh();
-    themCacCanh(); // Thêm các cạnh ngẫu nhiên vào đồ thị
-    veDoThiCanvas(); // Vẽ đồ thị lên canvas
-    kiemTraEuler(); // Kiểm tra và hiển thị kết luận về chu trình Euler
+    taoDinh();
+    randomCanh(); // Thêm các cạnh ngẫu nhiên vào đồ thị
+    veCanvas(); // Vẽ đồ thị lên canvas
+    checkEuler(); // Kiểm tra và hiển thị kết luận về chu trình Euler
     hienThiMaTran(); // Hiển thị ma trận kề
   } else {
     alert("Hãy nhập số đỉnh từ 2 đến 12");
@@ -32,7 +26,7 @@ function veDoThi() {
      đảm bảo rằng không có đỉnh nào bị cô đơn (không có cạnh nào kết nối).
      - Chọn ngẫu nhiên hai đỉnh khác nhau
      - Thêm cạnh giữa hai đỉnh đó vào mảng cacCanh */
-function themCacCanh() {
+function randomCanh() {
   for (let i = 0; i < soDinh * 2; i++) {
     // Vòng lặp từ 0 đến số đỉnh.
     const a = Math.floor(Math.random() * cacDinh.length); // Chọn số ngẫu nhiên từ số lượng đỉnh.
@@ -44,7 +38,7 @@ function themCacCanh() {
   }
   for (const dinh of cacDinh) {
     // Kiểm tra xem đỉnh có cô đơn hay không
-    if (demBacDinh(dinh) == 0) {
+    if (demBac(dinh) == 0) {
       // Nếu đỉnh đó = 0 (Cô đơn) thì thêm cạnh của đỉnh đó với đỉnh ngẫu nhiên khác.
       let dinhTemp = cacDinh[Math.floor(Math.random() * cacDinh.length)]; // Chọn số ngẫu nhiên từ số lượng đỉnh.
       while (dinhTemp == dinh) {

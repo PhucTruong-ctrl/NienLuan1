@@ -21,9 +21,9 @@ document.getElementById("file-input").addEventListener("change", function () {
       return;
     }
 
-    khoiTaoDoThi();
+    khoiTao();
     soDinh = soDinhDoc;
-    taoCacDinh();
+    taoDinh();
 
     for (let i = 1; i < soDinh; i++) {
       const hang = noiDung[i].split(/\s+/).map(Number);
@@ -34,8 +34,8 @@ document.getElementById("file-input").addEventListener("change", function () {
       }
     }
 
-    veDoThiCanvas();
-    kiemTraEuler();
+    veCanvas();
+    checkEuler();
     hienThiMaTran();
 
     // console.log(soDinh);
