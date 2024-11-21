@@ -1,0 +1,70 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Trang-1" id="0UHbgcNx_6mgdX7WhsI-">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7sF23SuMqhazOzQHMUB_-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-1" target="7sF23SuMqhazOzQHMUB_-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-1" value="Bắt đầu" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-2" target="7sF23SuMqhazOzQHMUB_-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-2" value="Cho x và y là 2 biến để lưu lại vị trí của từng đỉnh" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="519.5" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-3" target="7sF23SuMqhazOzQHMUB_-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-3" value="demBac" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-5" target="7sF23SuMqhazOzQHMUB_-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-5" value="Chạy vòng lặp với mỗi thuộc tính trong đối tượng viTri" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="519.5" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-6" target="7sF23SuMqhazOzQHMUB_-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-6" target="7sF23SuMqhazOzQHMUB_-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-6" value="Nếu bậc đỉnh đó&lt;div&gt;&amp;nbsp;là bậc lẻ&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="352.5" y="145" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-8" target="7sF23SuMqhazOzQHMUB_-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-8" value="Tô đỉnh màu đỏ" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-9" target="7sF23SuMqhazOzQHMUB_-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-9" value="Tô đỉnh màu đen" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="7sF23SuMqhazOzQHMUB_-10" target="7sF23SuMqhazOzQHMUB_-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-10" value="Vẽ ra đỉnh đó ở vị trí x, y" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-11" value="Kết thúc" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-17" value="Đúng" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="367" y="273" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="7sF23SuMqhazOzQHMUB_-19" value="Sai" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="312" y="180" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

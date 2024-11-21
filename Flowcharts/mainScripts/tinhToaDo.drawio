@@ -1,0 +1,88 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Trang-1" id="7so8QC7K1FsE7ydwpkkg">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-1" target="g1-cMOGO7BjZlcMmroCp-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-1" value="Khai báo đối tượng vị trí để chứa vị trí của từng đỉnh" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="180" y="20" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-2" target="g1-cMOGO7BjZlcMmroCp-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-2" value="Bắt đầu" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-3" target="g1-cMOGO7BjZlcMmroCp-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-3" value="Cho kích thước để vẽ grid là 100" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="g1-cMOGO7BjZlcMmroCp-4" target="g1-cMOGO7BjZlcMmroCp-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-4" value="Tính số lượng hàng và cột cho các đỉnh" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="495" y="20" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="g1-cMOGO7BjZlcMmroCp-5" target="g1-cMOGO7BjZlcMmroCp-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-5" value="Chạy vòng lặp i++" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="117" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-6" target="g1-cMOGO7BjZlcMmroCp-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="EJR7ut2x4C_owP1_8jYN-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="g1-cMOGO7BjZlcMmroCp-6" target="g1-cMOGO7BjZlcMmroCp-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-6" value="i nhỏ hơn soDinh" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="205" y="107" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-7" target="g1-cMOGO7BjZlcMmroCp-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-7" value="Dùng i để xác định hàng và cột mà ta sẽ tính&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="185" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-9" target="g1-cMOGO7BjZlcMmroCp-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-9" value="Cho x cộng với i cột nhân với kích thước grid&lt;div&gt;Cho y cộng với i hàng nhân với kích thước grid&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="313" width="270" height="69" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-10" target="g1-cMOGO7BjZlcMmroCp-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-10" value="Dùng đối tượng vị trí để lưu Khoá - Giá trị.&lt;br&gt;Ở đây là Đỉnh i - [x,y]" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="170" y="415" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-11" target="g1-cMOGO7BjZlcMmroCp-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-11" value="Trả về đối tượng vị trí" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="185" y="627" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-12" value="Kết thúc" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="627" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="g1-cMOGO7BjZlcMmroCp-22" target="g1-cMOGO7BjZlcMmroCp-11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-cMOGO7BjZlcMmroCp-22" value="Kết thúc vòng lặp" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="185" y="519" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="EJR7ut2x4C_owP1_8jYN-2" value="Đúng" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="195" y="187" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="EJR7ut2x4C_owP1_8jYN-3" value="Sai" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="245" y="86" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
