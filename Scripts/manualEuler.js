@@ -25,10 +25,12 @@ function taoDoThi() {
    - Hiển thị kết luận về chu trình Euler */
 function veDoThi() {
   if (soDinh <= 12 && soDinh >= 2) {
+    cacCanh = [];
     layVaThemCanh();
     veCanvas();
     hienThiMaTran();
     checkEuler();
+    timChuTrinhEuler();
     $("#button-xoa").show();
     $("#ketLuan").show();
   }
@@ -69,7 +71,8 @@ function layVaThemCanh() {
   for (let i = 0; i < inputCount; i++) {
     for (let j = 0; j < cacDinh.length; j++) {
       const dinh = cacDinh[j];
-      const dinhInput = $(`#input-${dinh}-${i}`).val();
+      let dinhInput = $(`#input-${dinh}-${i}`).val();
+      dinhInput = dinhInput ? dinhInput.toUpperCase() : null;
       if (dinhInput && cacDinh.includes(dinhInput)) {
         themCanh(dinh, dinhInput);
       }

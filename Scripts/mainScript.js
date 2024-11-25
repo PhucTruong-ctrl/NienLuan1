@@ -1,22 +1,23 @@
 let cacCanh = []; // Mảng chứa cạnh
 let cacDinh = []; // Mảng chứa đỉnh
 let soDinh = 0; // Số đỉnh
+let euler = false;
+let nuaEuler = false;
 
 // Ẩn các nút không cần thiết khi mới load trang
 $(document).ready(function () {
-  $("#button-them").hide();
-  $("#button-themCanh").hide();
-  $("#button-ve").hide();
-  $("#ketLuan").hide();
+  $("#button-them, #button-themCanh, #button-ve, #ketLuan, #chuTrinh").hide();
 });
 
 // Khởi tạo đồ thị, Reset các mảng, lấy số đình từ input
 function khoiTao() {
   cacCanh = [];
   cacDinh = [];
+  euler = false;
+  nuaEuler = false;
   soDinh = $("#soDinh").val();
-  $("#canhContainer").empty();
-  $("#ketLuan").empty();
+  $("#canhContainer, #ketLuan").empty();
+  console.clear();
 }
 
 // Xoá đồ thị bằng cách refresh lại trang
@@ -61,10 +62,11 @@ function themCanh(dinhHienTai, dinhTiepTheo) {
 
   if (coCanhHienTai(dinhHienTai, dinhTiepTheo)) {
     [dinhHienTai, dinhTiepTheo] = [dinhTiepTheo, dinhHienTai];
-    console.log("Có cạnh trùng giữa " + dinhHienTai + " và " + dinhTiepTheo);
+    // console.log("Có cạnh trùng giữa " + dinhHienTai + " và " + dinhTiepTheo);
   }
+
   if (demCanhTrung < 2) {
-    console.log("Đang thêm: " + dinhHienTai + " và " + dinhTiepTheo);
+    // console.log("Đang thêm: " + dinhHienTai + " và " + dinhTiepTheo);
     cacCanh.push([dinhHienTai, dinhTiepTheo]);
   }
 }
@@ -112,7 +114,7 @@ function tinhToaDo() {
   const gridSize = 100;
   const hang = Math.ceil(Math.sqrt(soDinh)); // Math.ceil làm tròn lên số nguyên lớn nhất
   const cot = Math.ceil(soDinh / hang); // Math.ceil làm tròn lên số nguyên lớn nhất
-  console.log(hang, cot);
+  // console.log(hang, cot);
 
   for (let i = 0; i < soDinh; i++) {
     const Hang = Math.floor(i / cot); // Math.floor làm tròn xuống số nguyên nhỏ nhất
@@ -161,6 +163,7 @@ function veCanh(p, viTri) {
   p.stroke(0);
   p.strokeWeight(2);
   p.noFill();
+  // console.log(cacCanh);
   cacCanh.forEach(function (canh) {
     const [dinhHienTai, dinhTiepTheo] = canh;
     const [x1, y1] = viTri[dinhHienTai];
@@ -183,9 +186,9 @@ function veCanh(p, viTri) {
       const offset = 20;
       const controlX = xGiua + offset * Math.sign(y2 - y1); // Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
       const controlY = yGiua - offset * Math.sign(x2 - x1); // Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
-      console.log("Đỉnh là: " + dinhHienTai, x1, y1, dinhTiepTheo, x2, y2);
-      console.log("xGiua, yGiua: ", xGiua, yGiua);
-      console.log("controlX, controlY: ", controlX, controlY);
+      // console.log("Đỉnh là: " + dinhHienTai, x1, y1, dinhTiepTheo, x2, y2);
+      // console.log("xGiua, yGiua: ", xGiua, yGiua);
+      // console.log("controlX, controlY: ", controlX, controlY);
 
       p.beginShape();
       p.vertex(x1, y1);
@@ -254,7 +257,7 @@ function demBac(dinh = null) {
      - Trả về true nếu có thể đi đến tất cả các đỉnh 
      - Trả về false nếu không thể đi đến một số đỉnh */
 function checkLienThong() {
-  const visited = new Set(); // Set để đảm bảo mỗi phần tử là duy nhất
+  const daTham = new Set(); // Set để đảm bảo mỗi phần tử là duy nhất
   const stack = [];
 
   // Bắt đầu từ đỉnh đầu tiên
@@ -263,16 +266,16 @@ function checkLienThong() {
   while (stack.length > 0) {
     const dinhHienTai = stack.pop();
 
-    if (!visited.has(dinhHienTai)) {
+    if (!daTham.has(dinhHienTai)) {
       // console.log(`Đang xét đỉnh: ${dinhHienTai}`);
-      visited.add(dinhHienTai);
+      daTham.add(dinhHienTai);
 
       // Tìm các đỉnh kề chưa được thăm và thêm vào stack
       for (const [dinhA, dinhB] of cacCanh) {
-        if (dinhA == dinhHienTai && !visited.has(dinhB)) {
+        if (dinhA == dinhHienTai && !daTham.has(dinhB)) {
           // console.log(`Thêm ${dinhB} vào stack để xét sau`);
           stack.push(dinhB);
-        } else if (dinhB == dinhHienTai && !visited.has(dinhA)) {
+        } else if (dinhB == dinhHienTai && !daTham.has(dinhA)) {
           // console.log(`Thêm ${dinhA} vào stack để xét sau`);
           stack.push(dinhA);
         }
@@ -281,10 +284,10 @@ function checkLienThong() {
       //   console.log(`Đỉnh ${dinhHienTai} đã được thăm, quay lui`);
     }
     // console.log(`Stack hiện tại: ${stack.join(", ")}`);
-    // console.log(`Các đỉnh đã thăm: ${[...visited].join(", ")}`);
+    // console.log(`Các đỉnh đã thăm: ${[...daTham].join(", ")}`);
     // console.log("---");
   }
-  return visited.size == cacDinh.length;
+  return daTham.size == cacDinh.length;
 }
 
 /* Hàm này kiểm tra và kết luận về chu trình Euler của đồ thị.
@@ -312,9 +315,11 @@ function checkEuler() {
     if (bacLe == 0) {
       ketLuan =
         "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn và đồ thị liên thông";
+      euler = true;
     } else if (bacLe == 2) {
       ketLuan =
-        "Là nửa chu trình Euler vì có đúng 2 đỉnh bậc lẻ và đồ thị liên thông";
+        "Là nửa chu trình Euler vì có 2 đỉnh bậc lẻ và đồ thị liên thông";
+      nuaEuler = true;
     } else {
       ketLuan = "Không là chu trình Euler";
     }
@@ -323,6 +328,102 @@ function checkEuler() {
   }
 
   $("#ketLuan").html(ketLuan);
+}
+
+// Credits:
+// https://www.geeksforgeeks.org/fleurys-algorithm-for-printing-eulerian-path/
+// https://www.youtube.com/watch?v=HXNyr2N3euc
+function timChuTrinhEuler() {
+  if (!euler && !nuaEuler) {
+    $("#chuTrinh").hide();
+    return; // Nếu không là "Euler" và cũng không là "Nữa Euler" thì không chạy
+  }
+
+  const bacDinh = demBac(); // Lấy bậc của tất cả các đỉnh. VD: bacDinh = { A: 2, B: 3, C: 3, D: 2 };
+  let dinhBatDau = null; // Cần xác định đỉnh để bắt đầu
+
+  if (euler) {
+    dinhBatDau = cacDinh[0]; // Nếu là Euler thì lấy đỉnh đầu tiên
+  } else if (nuaEuler) {
+    dinhBatDau = cacDinh.find((dinh) => bacDinh[dinh] % 2 !== 0); // .find là tìm phần tử thoả điều kiện đề ra
+  } // Nếu là nữa Euler thì lấy đỉnh bậc lẻ đầu tiên
+
+  const chuTrinh = [];
+  const doThi = cacCanh.slice(); // .slice tạo ra một mảng copy của mảng gốc. Không có tham số (start,end) thì copy cả mảng
+  $("#chuTrinh").show();
+
+  function coCau(dinh, canh) {
+    const index = doThi.indexOf(canh); // Xác định index của canh nhập vào
+
+    if (index !== -1) {
+      doThi.splice(index, 1); // Xoá tạm thời cạnh ở vị trí index
+    }
+    const daTham = new Set();
+    const stack = [dinh];
+
+    while (stack.length) {
+      const dinhHienTai = stack.pop();
+      if (!daTham.has(dinhHienTai)) {
+        daTham.add(dinhHienTai);
+
+        for (const [dinhA, dinhB] of doThi) {
+          if (dinhA === dinhHienTai && !daTham.has(dinhB)) {
+            stack.push(dinhB);
+          }
+          if (dinhB === dinhHienTai && !daTham.has(dinhA)) {
+            stack.push(dinhA);
+          }
+        }
+      }
+    }
+
+    doThi.splice(index, 0, canh); // Thêm cạnh vừa kiểm tra vô lại
+    console.log("Cạnh: ", canh, "Có cầu: ", daTham.size < cacDinh.length);
+    return daTham.size < cacDinh.length; // Nếu số lượng đỉnh đã thăm mà nhỏ hơn tổng số lượng đỉnh thì tức là đây chính là cầu
+  }
+
+  /* Trong Fleury:
+  Cạnh cầu là cạnh mà nếu bị xóa, sẽ làm hỏng chu trình Euler, dù cho đồ thị vẫn liên thông.
+  Trong các đồ thị có chu trình Euler hoặc đường Euler, 
+  khi thuật toán tìm một cạnh để đi qua, nó sẽ tránh chọn các cạnh cầu (trừ khi không có lựa chọn nào khác). */
+  function fleury(dinh) {
+    // Vòng lặp này né cạnh cầu
+    for (let i = 0; i < doThi.length; i++) {
+      const [u, v] = doThi[i];
+      if (u === dinh || v === dinh) {
+        const canh = doThi[i];
+        const dinhKhac = u === dinh ? v : u; // Điều kiện ? true : false
+        // Nếu u bằng đỉnh nhập thì đỉnh còn lại của cạnh đó là v và ngược lại
+        // console.log("Hello");
+        if (!coCau(dinh, canh)) {
+          console.log("Né cầu");
+          doThi.splice(i, 1);
+          chuTrinh.push([dinh, dinhKhac]);
+          return fleury(dinhKhac);
+        }
+      }
+    }
+
+    // Vòng lặp này lấy cạnh còn lại
+    for (let i = 0; i < doThi.length; i++) {
+      const [u, v] = doThi[i];
+      if (u === dinh || v === dinh) {
+        console.log("Đang lấy cầu");
+        const dinhKhac = u === dinh ? v : u;
+        doThi.splice(i, 1);
+        chuTrinh.push([dinh, dinhKhac]);
+        return fleury(dinhKhac);
+      }
+    }
+  }
+
+  fleury(dinhBatDau);
+
+  $("#chuTrinh").html(
+    `Chu trình tìm được: ${chuTrinh
+      .map((canh) => `${canh[0]} -> ${canh[1]}`)
+      .join(", ")}`
+  );
 }
 
 /* Hàm này tạo ma trận kề của đồ thị.
@@ -340,7 +441,7 @@ function taoMaTran() {
   for (let i = 0; i < soDinh; i++) {
     maTran[i] = [];
     for (let j = 0; j < soDinh; j++) {
-      if (coCanh(cacDinh[i], cacDinh[j])) {
+      if (coCanhHienTai(cacDinh[i], cacDinh[j])) {
         maTran[i][j] = 1;
       } else {
         maTran[i][j] = 0;

@@ -15,6 +15,7 @@ function veDoThi() {
     veCanvas(); // Vẽ đồ thị lên canvas
     checkEuler(); // Kiểm tra và hiển thị kết luận về chu trình Euler
     hienThiMaTran(); // Hiển thị ma trận kề
+    timChuTrinhEuler();
   } else {
     alert("Hãy nhập số đỉnh từ 2 đến 12");
     return;
