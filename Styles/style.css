@@ -76,10 +76,11 @@ h1 {
   transform: scale(1.4);
 }
 
-#ketLuan {
+#ketLuan, #chuTrinh {
   background-color: var(--color-Orange);
   color: var(--color-Black);
   padding: 10px;
+  margin-bottom: 20px;
   text-align: center;
   font-weight: 700;
   border-radius: 6px;
