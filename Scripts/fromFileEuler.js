@@ -25,15 +25,14 @@ document.getElementById("file-input").addEventListener("change", function () {
     soDinh = soDinhDoc;
     taoDinh();
 
-    for (let i = 1; i < soDinh; i++) {
-      const hang = noiDung[i].split(/\s+/).map(Number); // .split
+    for (let i = 1; i <= soDinh; i++) {
+      const hang = noiDung[i].split(/\s+/).map(Number);
       for (let j = 0; j < hang.length; j++) {
         if (hang[j] == 1) {
           themCanh(cacDinh[i - 1], cacDinh[j]);
         }
       }
     }
-    // VD:
 
     veCanvas();
     checkEuler();

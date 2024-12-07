@@ -183,16 +183,38 @@ function veCanh(p, viTri) {
     if (demCanhTrung > 1) {
       const xGiua = (x1 + x2) / 2;
       const yGiua = (y1 + y2) / 2;
-      const offset = 20;
-      const controlX = xGiua + offset * Math.sign(y2 - y1); // Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
-      const controlY = yGiua - offset * Math.sign(x2 - x1); // Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      console.log(
+        "Toạ độ của:",
+        dinhHienTai,
+        "Là",
+        x1,
+        y1,
+        "Và của",
+        dinhTiepTheo,
+        "Là",
+        x2,
+        y2,
+        "Vậy trung điểm của cạnh này:",
+        xGiua,
+        yGiua
+      );
+      const tiLeCong = 20;
+      const controlX = xGiua + tiLeCong * Math.sign(y2 - y1); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      //X là hàng ngang nên muốn nó cong phải đẩy lên xuống bằng Y
+
+      const controlY = yGiua - tiLeCong * Math.sign(x2 - x1); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      //Tương tự muốn tạo đường cong cho hàng dọc thì đẩy trái phải
+
       // console.log("Đỉnh là: " + dinhHienTai, x1, y1, dinhTiepTheo, x2, y2);
       // console.log("xGiua, yGiua: ", xGiua, yGiua);
-      // console.log("controlX, controlY: ", controlX, controlY);
+      console.log("Math.sign(y2-y1): ", Math.sign(y2 - y1));
+      console.log("Math.sign(x2-x1): ", Math.sign(x2 - x1));
+
+      console.log("controlX, controlY: ", controlX, controlY);
 
       p.beginShape();
-      p.vertex(x1, y1);
-      p.quadraticVertex(controlX, controlY, x2, y2);
+      p.vertex(x1, y1); // Là đỉnh hiện tại
+      p.quadraticVertex(controlX, controlY, x2, y2); // x2, y2 là đỉnh tiếp theo
       p.endShape();
     } else {
       p.line(x1, y1, x2, y2);
@@ -247,7 +269,7 @@ function demBac(dinh = null) {
     bacDinh[dinhTiepTheo] += 1;
   });
 
-  return dinh ? bacDinh[dinh] : bacDinh;
+  return dinh ? bacDinh[dinh] : bacDinh; // Điều kiện ? true : false
 }
 
 /* Hàm này kiểm tra tính liên thông của đồ thị bằng DFS.  
@@ -314,17 +336,17 @@ function checkEuler() {
   if (checkLienThong()) {
     if (bacLe == 0) {
       ketLuan =
-        "Là chu trình Euler vì tất cả các đỉnh có bậc chẵn và đồ thị liên thông";
+        "Có chu trình Euler vì tất cả các đỉnh có bậc chẵn";
       euler = true;
     } else if (bacLe == 2) {
       ketLuan =
-        "Là nửa chu trình Euler vì có 2 đỉnh bậc lẻ và đồ thị liên thông";
+        "Chỉ có nửa chu trình Euler vì có 2 đỉnh bậc lẻ";
       nuaEuler = true;
     } else {
       ketLuan = "Không là chu trình Euler";
     }
   } else {
-    ketLuan = "Không là chu trình Euler vì đồ thị không liên thông";
+    ketLuan = "Đồ thị không liên thông";
   }
 
   $("#ketLuan").html(ketLuan);
@@ -421,8 +443,8 @@ function timChuTrinhEuler() {
 
   $("#chuTrinh").html(
     `Chu trình tìm được: ${chuTrinh
-      .map((canh) => `${canh[0]} -> ${canh[1]}`)
-      .join(", ")}`
+      .map((canh) => `${canh[0]} -> ${canh[1]}`) // .map sẽ duyệt qua từng phần tử
+      .join(", ")}` // .join với mỗi phần tử duyệt qua thì sẽ gộp lại thành một chuỗi cách nhau. VD: "A -> B, B -> C, C -> D"
   );
 }
 

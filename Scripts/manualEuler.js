@@ -48,7 +48,7 @@ function hienThiDinh() {
       const input = $("<input>")
         .attr("id", `input-${dinh}-${inputCount}`)
         .attr("class", "form-control")
-        .attr("placeholder", "Nhập đỉnh kết nối. VD: " + dinh);
+        .attr("placeholder", "Nhập đỉnh kết nối.");
       $("#canhContainer").append(label).append(input);
     });
   } else {
