@@ -199,22 +199,22 @@ function veCanh(p, viTri) {
         yGiua
       );
       const tiLeCong = 20;
-      const controlX = xGiua + tiLeCong * Math.sign(y2 - y1); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      const controlX = xGiua + tiLeCong * (Math.sign(y2 - y1)); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
       //X là hàng ngang nên muốn nó cong phải đẩy lên xuống bằng Y
 
-      const controlY = yGiua - tiLeCong * Math.sign(x2 - x1); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      const controlY = yGiua - tiLeCong * (Math.sign(x2 - x1)); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
       //Tương tự muốn tạo đường cong cho hàng dọc thì đẩy trái phải
 
       // console.log("Đỉnh là: " + dinhHienTai, x1, y1, dinhTiepTheo, x2, y2);
       // console.log("xGiua, yGiua: ", xGiua, yGiua);
       console.log("Math.sign(y2-y1): ", Math.sign(y2 - y1));
       console.log("Math.sign(x2-x1): ", Math.sign(x2 - x1));
-
       console.log("controlX, controlY: ", controlX, controlY);
 
       p.beginShape();
       p.vertex(x1, y1); // Là đỉnh hiện tại
       p.quadraticVertex(controlX, controlY, x2, y2); // x2, y2 là đỉnh tiếp theo
+      // https://p5js.org/reference/p5/quadraticVertex/
       p.endShape();
     } else {
       p.line(x1, y1, x2, y2);
