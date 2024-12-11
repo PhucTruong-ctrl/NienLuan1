@@ -42,7 +42,7 @@ function veDoThi() {
    - Mỗi ô input cho phép nhập đỉnh kết nối
    - ID của mỗi input là dạng input-A-0, input-B-0, ... */
 function hienThiDinh() {
-  if (inputCount <= 1) {
+  if (inputCount <= 2) {
     cacDinh.forEach((dinh) => {
       const label = $("<label></label>").text(`${dinh}: `);
       const input = $("<input>")
