@@ -7,7 +7,7 @@
    - Hiển thị ma trận kề và kiểm tra chu trình Euler */
 function veDoThi() {
   khoiTao();
-  if (soDinh <= 12 && soDinh >= 2) {
+  if (soDinh <= 6 && soDinh >= 2) {
     // Đảm bảo đỉnh vẽ ra chuẩn
     $("#ketLuan").show();
     taoDinh();
@@ -17,7 +17,7 @@ function veDoThi() {
     hienThiMaTran(); // Hiển thị ma trận kề
     timChuTrinhEuler();
   } else {
-    alert("Hãy nhập số đỉnh từ 2 đến 12");
+    alert("Hãy nhập số đỉnh từ 2 đến 6");
     return;
   }
 }

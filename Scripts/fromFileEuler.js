@@ -16,8 +16,8 @@ document.getElementById("file-input").addEventListener("change", function () {
       return;
     }
 
-    if (isNaN(soDinhDoc) || soDinhDoc <= 2 || soDinhDoc > 12) {
-      alert("Số đỉnh không hợp lệ (2 - 12).");
+    if (isNaN(soDinhDoc) || soDinhDoc <= 2 || soDinhDoc > 6) {
+      alert("Số đỉnh không hợp lệ (2 - 6).");
       return;
     }
 

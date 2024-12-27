@@ -9,12 +9,16 @@ let inputCount = 0; // Biến đếm số lần nhập input
    - Hiển thị các nút Xóa, Thêm, Thêm cạnh, Vẽ */
 function taoDoThi() {
   khoiTao();
-  if (soDinh <= 12 && soDinh >= 2) {
+  if (soDinh <= 6 && soDinh >= 2) {
     taoDinh();
     hienThiDinh();
     $("#button-them").show();
     $("#button-themCanh").show();
     $("#button-ve").show();
+  }
+  else {
+    alert("Hãy nhập số đỉnh từ 2 đến 6");
+    return;
   }
 }
 
@@ -24,7 +28,7 @@ function taoDoThi() {
    - Hiển thị ma trận kề tương ứng
    - Hiển thị kết luận về chu trình Euler */
 function veDoThi() {
-  if (soDinh <= 12 && soDinh >= 2) {
+  if (soDinh <= 6 && soDinh >= 2) {
     cacCanh = [];
     layVaThemCanh();
     veCanvas();
@@ -33,6 +37,10 @@ function veDoThi() {
     timChuTrinhEuler();
     $("#button-xoa").show();
     $("#ketLuan").show();
+  }
+  else {
+    alert("Hãy nhập số đỉnh từ 2 đến 6");
+    return;
   }
 }
 

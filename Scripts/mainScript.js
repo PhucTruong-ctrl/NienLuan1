@@ -199,10 +199,10 @@ function veCanh(p, viTri) {
         yGiua
       );
       const tiLeCong = 20;
-      const controlX = xGiua + tiLeCong * (Math.sign(y2 - y1)); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      const controlX = xGiua + tiLeCong * Math.sign(y2 - y1); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
       //X là hàng ngang nên muốn nó cong phải đẩy lên xuống bằng Y
 
-      const controlY = yGiua - tiLeCong * (Math.sign(x2 - x1)); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
+      const controlY = yGiua - tiLeCong * Math.sign(x2 - x1); // Math.sign Trả về 1 nếu dương, -1 nếu âm, 0 nếu bằng 0
       //Tương tự muốn tạo đường cong cho hàng dọc thì đẩy trái phải
 
       // console.log("Đỉnh là: " + dinhHienTai, x1, y1, dinhTiepTheo, x2, y2);
@@ -335,12 +335,10 @@ function checkEuler() {
 
   if (checkLienThong()) {
     if (bacLe == 0) {
-      ketLuan =
-        "Có chu trình Euler vì tất cả các đỉnh có bậc chẵn";
+      ketLuan = "Có chu trình Euler vì tất cả các đỉnh có bậc chẵn";
       euler = true;
     } else if (bacLe == 2) {
-      ketLuan =
-        "Chỉ có nửa chu trình Euler vì có 2 đỉnh bậc lẻ";
+      ketLuan = "Chỉ có nửa chu trình Euler vì có 2 đỉnh bậc lẻ";
       nuaEuler = true;
     } else {
       ketLuan = "Không là chu trình Euler";
